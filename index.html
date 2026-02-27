@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目名称 - Project Page</title>
+    <!-- 引入图标库 (可选，用于显示GitHub图标) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f6f8fa;
+            color: #24292e;
+            line-height: 1.6;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 头部 Hero 区域 */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        /* 按钮组 */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Badge 区域 */
+        .badges {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .badge {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        /* 内容卡片 */
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            color: #667eea;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* 特性列表 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            background: #fafbfc;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 10px;
+            color: #24292e;
+        }
+
+        /* 图片展示 */
+        .demo-img {
+            width: 100%;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        /* 代码块样式 */
+        pre {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        code {
+            font-family: 'SFMono-Regular', Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        /* BibTeX 样式 */
+        .bibtex {
+            background-color: #f6f8fa;
+            border: 1px solid #d1d5da;
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #586069;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 1. Hero 区域：项目名字 + 核心链接 -->
+    <header class="hero">
+        <h1>Project Name</h1>
+        <p>这里用一句话概括您的项目：A New Framework for XXX / 一个用于XX任务的高效工具库</p>
+        
+        <div class="btn-group">
+            <a href="https://github.com/您的用户名/项目仓库" class="btn" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://arxiv.org/abs/xx.xxxx" class="btn btn-outline" target="_blank">
+                <i class="fas fa-file-pdf"></i> Paper (arXiv)
+            </a>
+            <a href="#demo" class="btn btn-outline">
+                <i class="fas fa-play-circle"></i> Demo
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. Badges (可选：显示Stars, Paper状态等) -->
+    <div class="badges">
+        <!-- 这里的图片链接可以换成 shields.io 的徽章 -->
+        <img src="https://img.shields.io/github/stars/您的用户名/项目仓库?style=social" alt="GitHub Stars" class="badge">
+        <img src="https://img.shields.io/badge/arXiv-xx.xxxx-red.svg" alt="arXiv" class="badge">
+        <img src="https://img.shields.io/badge/Conference-CVPR%202024-blue" alt="Conference" class="badge">
+    </div>
+
+    <!-- 3. 摘要/简介 -->
+    <section class="card">
+        <h2>📖 简介 (Abstract)</h2>
+        <p>
+            在这里详细介绍您的项目。可以复制论文的Abstract部分。
+            比如：我们提出了一种新的方法，用于解决XX领域的XX问题。
+            该方法在XX数据集上取得了SOTA的效果，相比之前的方法提升了X%。
+        </p>
+    </section>
+
+    <!-- 4. 方法亮点/特性 -->
+    <section class="card">
+        <h2>✨ 主要特性 (Key Features)</h2>
+        <div class="features">
+            <div class="feature-item">
+                <h3>特性一</h3>
+                <p>简单描述这个创新点，比如：端到端的训练方式，无需人工干预。</p>
+            </div>
+            <div class="feature-item">
+                <h3>特性二</h3>
+                <p>简单描述这个创新点，比如：速度快，比现有方法快3倍。</p>
+            </div>
+            <div class="feature-item">
+                <h3>特性三</h3>
+                <p>简单描述这个创新点，比如：代码开源，易于复现和扩展。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 效果展示图 (非常重要) -->
+    <section class="card" id="demo">
+        <h2>🖼️ 效果展示 (Visualization)</h2>
+        <p>把您的论文效果图或Demo截图命名为 demo.png 上传到仓库，替换下面的 src。</p>
+        
+        <!-- 占位图，请替换为您自己的图片路径 -->
+        <img src="demo.png" alt="Demo Image" class="demo-img" style="background-color: #eee; display: flex; align-items: center; justify-content: center; height: 300px; color: #888;">
+        
+        <p style="text-align: center; color: #666; font-size: 0.9rem;">图注：在这里描述这张图展示了什么效果。</p>
+    </section>
+
+    <!-- 6. 安装与使用 -->
+    <section class="card">
+        <h2>🚀 快速开始 (Quick Start)</h2>
+        
+        <h3>安装 (Installation)</h3>
+        <pre><code># 克隆仓库
+git clone https://github.com/您的用户名/项目仓库.git
+cd 项目仓库
+
+# 安装依赖
+pip install -r requirements.txt</code></pre>
+
+        <h3>使用方法 (Usage)</h3>
+        <pre><code># 运行示例代码
+python demo.py --config configs/test.yaml</code></pre>
+    </section>
+
+    <!-- 7. 引用 (如果是论文项目) -->
+    <section class="card">
+        <h2>📝 引用 (Citation)</h2>
+        <p>如果您觉得这个项目对您的研究有帮助，请引用我们的论文：</p>
+        <div class="bibtex">
+            <pre><code>@inproceedings{zhang2024projectname,
+  title={Project Title},
+  author={Author 1 and Author 2 and Author 3},
+  booktitle={Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2024}
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- 8. 联系方式 -->
+    <section class="card">
+        <h2>📧 联系方式 (Contact)</h2>
+        <ul>
+            <li>如有问题，请提 Issue：<a href="https://github.com/您的用户名/项目仓库/issues" target="_blank">GitHub Issues</a></li>
+            <li>或者联系作者：your.email [at] example.edu</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Your Lab. All rights reserved.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
