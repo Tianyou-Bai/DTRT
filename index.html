@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 替换为你的项目名称 -->
-    <title>项目英文名 | Project Page</title>
+    <title>你的项目英文名 | Project Page</title>
     <style>
-        /* 全局样式：复刻ViRED极简学术风 */
+        /* 全局样式：1:1复刻原网页学术风 */
         * {
             margin: 0;
             padding: 0;
@@ -14,392 +14,636 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Arial, 'Times New Roman', SimSun, sans-serif;
+            font-family: Arial, "Helvetica Neue", sans-serif;
             background-color: #ffffff;
-            color: #000000;
-            line-height: 1.6;
-            font-size: 17px;
+            color: #1a1a1a;
+            line-height: 1.65;
+            font-size: 16px;
         }
 
-        /* 核心容器：居中+宽度限制，适配阅读体验 */
+        /* 核心容器：居中+宽度限制，和原网页完全一致 */
         .container {
-            max-width: 900px;
+            max-width: 1050px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 40px 20px;
         }
 
-        /* 标题区域：居中排版 */
-        .header {
+        /* ========== 顶部标题区样式 ========== */
+        .project-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .project-title {
-            font-size: 32px;
-            font-weight: 600;
+            font-size: 2.2em;
+            font-weight: 700;
             margin-bottom: 15px;
             line-height: 1.3;
+            color: #111111;
         }
 
         .author-list {
-            font-size: 18px;
+            font-size: 1.1em;
             margin-bottom: 8px;
         }
 
-        .affiliation-list {
-            font-size: 16px;
-            color: #333333;
-            margin-bottom: 15px;
+        .author-list sup {
+            font-size: 0.7em;
         }
 
-        .paper-status {
-            font-size: 16px;
-            font-style: italic;
-            color: #555555;
+        .affiliation-list {
+            font-size: 0.95em;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .conference-info {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: #b32424;
             margin-bottom: 20px;
         }
 
+        /* 顶部链接按钮：和原网页按钮样式完全一致 */
         .link-group {
-            font-size: 18px;
-            font-weight: 500;
+            margin: 20px 0;
         }
 
-        .link-group a {
-            color: #003399;
+        .link-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 0 8px 10px 8px;
+            background-color: #e6f2ff;
+            color: #0066cc;
             text-decoration: none;
-            margin: 0 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
-        .link-group a:hover {
-            text-decoration: underline;
+        .link-btn:hover {
+            background-color: #0066cc;
+            color: #ffffff;
         }
 
-        /* 通用板块样式 */
+        /* 顶部效果图：左右双图布局，和原网页一致 */
+        .hero-figure {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .hero-figure img {
+            width: 100%;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+
+        .figure-caption {
+            font-size: 0.9em;
+            color: #444444;
+            text-align: center;
+            margin-top: 8px;
+            grid-column: 1 / -1;
+        }
+
+        /* ========== 通用板块样式 ========== */
         .section {
-            margin-bottom: 35px;
+            margin: 40px 0;
         }
 
         .section-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #111111;
             padding-bottom: 5px;
             border-bottom: 1px solid #eeeeee;
         }
 
         .section-content {
             text-align: justify;
-            color: #111111;
+            color: #222222;
+            margin-bottom: 15px;
         }
 
-        /* 贡献列表 */
-        .contribution-list {
-            padding-left: 25px;
-            margin-top: 10px;
-        }
-
-        .contribution-list li {
-            margin-bottom: 8px;
-            text-align: justify;
-        }
-
-        /* 方法流程图占位 */
-        .method-figure {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .method-figure img {
-            max-width: 100%;
-            border: 1px solid #dddddd;
-            border-radius: 4px;
-        }
-
-        .figure-caption {
-            font-size: 15px;
-            color: #444444;
-            margin-top: 8px;
-            text-align: center;
-        }
-
-        /* 表格样式：学术三线表，完全复刻原网页 */
-        table {
+        /* ========== 表格样式：学术三线表，完全复刻原网页 ========== */
+        .data-table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
+            font-size: 0.92em;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #d0d0d0;
+            padding: 6px 8px;
             text-align: center;
-            font-size: 16px;
         }
 
-        table thead tr {
-            border-top: 2px solid #333333;
-            border-bottom: 1px solid #333333;
-        }
-
-        table tbody tr:last-child {
-            border-bottom: 2px solid #333333;
-        }
-
-        table th, table td {
-            padding: 8px 5px;
-        }
-
-        table .highlight-row {
+        .data-table th {
+            background-color: #f5f5f5;
             font-weight: 600;
-            background-color: #f8f9fa;
         }
 
-        /* 效率图占位 */
-        .efficiency-figure {
-            margin: 20px 0;
-            text-align: center;
+        .data-table .best-result {
+            font-weight: 700;
+            color: #b32424;
         }
 
-        .efficiency-figure img {
-            max-width: 80%;
+        .data-table .second-result {
+            font-weight: 600;
+            color: #0066cc;
         }
 
-        /* 示例图区域 */
-        .examples-area {
-            margin: 20px 0;
+        .table-note {
+            font-size: 0.88em;
+            color: #444444;
+            margin-top: 8px;
+            line-height: 1.5;
         }
 
-        .examples-area img {
+        /* ========== 实验结果子板块 ========== */
+        .result-subsection {
+            margin: 25px 0;
+        }
+
+        .result-subsection h3 {
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .result-grid img {
             width: 100%;
-            border: 1px solid #dddddd;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
         }
 
-        /* BibTeX代码块 */
+        /* ========== 数据示例板块 ========== */
+        .example-list {
+            margin: 20px 0;
+        }
+
+        .example-item {
+            margin: 25px 0;
+            padding: 15px;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+        }
+
+        .example-item p {
+            margin-bottom: 10px;
+        }
+
+        .example-item img {
+            max-width: 100%;
+            margin: 10px 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .example-note {
+            font-size: 0.9em;
+            color: #555555;
+            font-style: italic;
+        }
+
+        /* ========== BibTeX代码块 ========== */
         .bibtex-block {
             background-color: #f5f5f5;
             border: 1px solid #e0e0e0;
             padding: 15px;
-            border-radius: 4px;
+            border-radius: 6px;
             overflow-x: auto;
             font-family: 'Courier New', monospace;
-            font-size: 15px;
-            margin-top: 10px;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin: 15px 0;
         }
 
-        /* 响应式适配：手机端正常显示 */
+        /* ========== 底部单位logo区 ========== */
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 50px 0 20px 0;
+            padding-top: 30px;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .footer-logos img {
+            height: 50px;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        /* ========== 响应式适配：手机端正常显示 ========== */
         @media (max-width: 768px) {
+            .hero-figure {
+                grid-template-columns: 1fr;
+            }
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
             .project-title {
-                font-size: 24px;
+                font-size: 1.6em;
             }
-            table {
-                font-size: 14px;
-            }
-            .container {
-                padding: 30px 15px;
+            .link-btn {
+                display: block;
+                margin: 8px auto;
+                max-width: 200px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 1. 顶部标题、作者、单位、链接区（完全复刻原网页结构） -->
-        <header class="header">
-            <h1 class="project-title">你的项目英文名: 项目副标题（和论文标题保持一致）</h1>
+        <!-- ========== 1. 顶部标题区：完全复刻原网页结构 ========== -->
+        <header class="project-header">
+            <h1 class="project-title">你的项目英文名: 项目副标题（和论文标题完全一致）</h1>
             
+            <!-- 作者列表：上标标注单位序号，*标注通讯作者 -->
             <div class="author-list">
-                <!-- 替换为你的作者列表，*标注通讯作者，上标标注单位序号 -->
-                First Author<sup>1</sup>, Second Author<sup>2</sup>, Third Author<sup>3</sup>,
-                Corresponding Author*<sup>1</sup>
+                First Author<sup>1</sup>, 
+                Second Author<sup>2</sup>, 
+                Third Author<sup>1</sup>, 
+                Corresponding Author*<sup>1,2</sup>
             </div>
             
+            <!-- 单位列表：和作者上标对应 -->
             <div class="affiliation-list">
-                <!-- 替换为作者单位 -->
-                <sup>1</sup>第一单位全称,
-                <sup>2</sup>第二单位全称,
-                <sup>3</sup>第三单位全称
+                <sup>1</sup>第一单位全称, 
+                <sup>2</sup>第二单位全称
             </div>
             
-            <div class="paper-status">
-                <!-- 替换为论文状态：Under Review / Accepted at CVPR 2024 / arXiv preprint 等 -->
-                Under Review
+            <!-- 会议/期刊信息 -->
+            <div class="conference-info">
+                CVPR 2025 / Under Review / arXiv preprint 2025
             </div>
             
+            <!-- 链接按钮：可根据你的项目增删 -->
             <div class="link-group">
-                <!-- 替换为你的论文、代码链接，没有的可以删掉 -->
-                <a href="你的论文PDF链接" target="_blank">Paper</a>
-                <a href="你的GitHub代码仓库链接" target="_blank">Code</a>
-                <a href="#bibtex">BibTeX</a>
+                <a href="你的论文PDF链接" target="_blank" class="link-btn">Paper</a>
+                <a href="你的GitHub代码链接" target="_blank" class="link-btn">Code</a>
+                <a href="你的Hugging Face数据集链接" target="_blank" class="link-btn">Dataset</a>
+                <a href="#bibtex" class="link-btn">BibTeX</a>
+            </div>
+
+            <!-- 顶部性能对比图：替换为你的项目的效果图 -->
+            <div class="hero-figure">
+                <img src="figure_left.png" alt="性能对比图左">
+                <img src="figure_right.png" alt="性能对比图右">
+                <p class="figure-caption">
+                    在这里填写图注，和原网页一致。例如：Performance comparison of 6 Multimodal Large Language Models on our proposed dataset across 11 subjects(left) and 3 question types(right).
+                </p>
             </div>
         </header>
 
-        <!-- 2. Abstract 摘要板块 -->
+        <!-- ========== 2. Introduction 板块 ========== -->
         <section class="section">
-            <h2 class="section-title">Abstract</h2>
+            <h2 class="section-title">Introduction</h2>
             <div class="section-content">
-                <!-- 替换为你的论文摘要，和论文里的Abstract保持一致即可 -->
-                在这里填写你的论文摘要内容。清晰说明你的研究要解决的问题、现有方法的不足、你提出的方法核心思路、关键实验结果和结论。
-                保持和原网页一致的段落风格，单段落即可，无需分段。
-            </div>
-        </section>
-
-        <!-- 3. Summary / Contributions 核心贡献板块 -->
-        <section class="section">
-            <h2 class="section-title">Summary</h2>
-            <div class="section-content">
-                <p>In summary, the contributions of our work are as follows:</p>
-                <ul class="contribution-list">
-                    <!-- 替换为你的论文核心贡献，一般3-5条，和论文里的保持一致 -->
-                    <li>第一条核心贡献，清晰说明你提出的方法/框架/数据集，解决了什么核心问题。</li>
-                    <li>第二条核心贡献，比如你构建了什么数据集、做了什么标注工作，填补了领域的什么空白。</li>
-                    <li>第三条核心贡献，比如你在什么数据集上做了全面的实验验证，和SOTA方法做了对比，取得了什么效果。</li>
-                    <li>第四条核心贡献，比如你做了充分的消融实验，验证了不同模块的有效性，为后续研究提供了什么参考。</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 4. Methodology 方法板块 -->
-        <section class="section">
-            <h2 class="section-title">Methodology</h2>
-            <div class="section-content">
-                <!-- 方法流程图：把你的方法框架图命名为 method.png 上传到仓库，替换src -->
-                <div class="method-figure">
-                    <img src="method.png" alt="Method Pipeline">
-                    <p class="figure-caption">
-                        在这里填写图注，说明你的方法整体流程。比如：你的方法整体框架，主要分为视觉编码器、对象编码器、关系解码器三个核心模块。
-                    </p>
-                </div>
-
-                <!-- 方法细节说明，可根据你的论文内容补充段落，也可以只放流程图+简单说明 -->
                 <p>
-                    在这里补充你的方法细节说明。可以分点描述每个模块的作用，也可以用段落形式说明你的方法核心设计思路、创新点的实现方式。
-                    无需放太多公式，保持网页的简洁性，详细内容引导读者阅读论文即可。
+                    在这里填写你的论文Introduction核心内容，和原网页保持一致的段落风格。
+                    第一段：说明你的研究领域背景，现有方法存在的问题和局限性。
+                </p>
+                <p style="margin-top: 10px;">
+                    第二段：说明你提出的方法/数据集，核心设计思路，解决了什么问题。
+                </p>
+                <p style="margin-top: 10px;">
+                    第三段：说明你的核心实验结果，和SOTA方法的对比效果，以及研究的价值。
                 </p>
             </div>
         </section>
 
-        <!-- 5. Experiments 实验板块 -->
+        <!-- ========== 3. Leaderboard 排行榜板块 ========== -->
         <section class="section">
-            <h2 class="section-title">Experiments</h2>
+            <h2 class="section-title">Leaderboard on 你的数据集名</h2>
+            <p class="section-content">Accuracy scores of models on our benchmark</p>
+            
+            <!-- 排行榜大表格：和原网页完全一致的结构，替换为你的数据 -->
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Overall</th>
+                        <th>Subject 1</th>
+                        <th>Subject 2</th>
+                        <th>Subject 3</th>
+                        <th>Subject 4</th>
+                        <th>Subject 5</th>
+                        <th>Subject 6</th>
+                        <th>Subject 7</th>
+                        <th>Subject 8</th>
+                        <th>Subject 9</th>
+                        <th>Subject 10</th>
+                        <th>Subject 11</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 最优结果用best-result，第二用second-result，和原网页一致 -->
+                    <tr>
+                        <td>Model Name 1</td>
+                        <td class="best-result">72.9</td>
+                        <td>80.6</td>
+                        <td>79.5</td>
+                        <td>69.8</td>
+                        <td>70.7</td>
+                        <td>68.3</td>
+                        <td>77.3</td>
+                        <td>74.5</td>
+                        <td>94.8</td>
+                        <td>64.9</td>
+                        <td>74.1</td>
+                        <td>80.0</td>
+                    </tr>
+                    <tr>
+                        <td>Model Name 2</td>
+                        <td class="second-result">42.4</td>
+                        <td>44.4</td>
+                        <td>51.5</td>
+                        <td>42.2</td>
+                        <td>41.5</td>
+                        <td>41.1</td>
+                        <td>40.9</td>
+                        <td>47.6</td>
+                        <td>56.2</td>
+                        <td>28.8</td>
+                        <td>46.8</td>
+                        <td>60.0</td>
+                    </tr>
+                    <tr>
+                        <td>Model Name 3</td>
+                        <td>37.1</td>
+                        <td>36.2</td>
+                        <td>43.1</td>
+                        <td>38.2</td>
+                        <td>48.8</td>
+                        <td>33.1</td>
+                        <td>40.9</td>
+                        <td>43.8</td>
+                        <td>62.5</td>
+                        <td>25.5</td>
+                        <td>42.4</td>
+                        <td>60.0</td>
+                    </tr>
+                    <tr>
+                        <td>Human Performance</td>
+                        <td>78.5</td>
+                        <td>75.2</td>
+                        <td>76.4</td>
+                        <td>83.2</td>
+                        <td>79.1</td>
+                        <td>72.4</td>
+                        <td>66.5</td>
+                        <td>79.0</td>
+                        <td>71.7</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 表格说明文字 -->
+            <p class="table-note">
+                Models: Closed-source models are highlighted in red, while open-source models are highlighted in blue.<br>
+                Subjects: Subject 1: 全称, Subject 2: 全称, Subject 3: 全称, Subject 4: 全称.
+            </p>
+        </section>
+
+        <!-- ========== 4. 数据集板块 ========== -->
+        <section class="section">
+            <h2 class="section-title">你的数据集名 Dataset</h2>
+            
+            <h3 style="font-size: 1.2em; margin: 20px 0 10px 0;">Overview</h3>
             <div class="section-content">
-                <h3 style="margin: 15px 0 8px 0;">Comparison to Previous Works</h3>
-                <!-- 和SOTA方法对比的表格，三线表，和原网页完全一致 -->
-                <table>
+                <p>
+                    在这里填写你的数据集概述，和原网页保持一致。说明数据集的构建方式、规模、分类、标注信息、核心特点。
+                    例如：Our dataset is a meticulously annotated dataset designed to evaluate the XXX capabilities of models in XXX contexts. It comprises XXX samples, covering XX subjects over XX difficulty levels...
+                </p>
+            </div>
+
+            <!-- 数据集统计表格 -->
+            <h3 style="font-size: 1.2em; margin: 20px 0 10px 0;">Statistics</h3>
+            <table class="data-table" style="max-width: 600px; margin: 0 auto;">
+                <thead>
+                    <tr>
+                        <th>Statistics</th>
+                        <th>Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Total Questions</td>
+                        <td>2009</td>
+                    </tr>
+                    <tr>
+                        <td>Multiple-choice questions</td>
+                        <td>1109</td>
+                    </tr>
+                    <tr>
+                        <td>Free-form questions</td>
+                        <td>900</td>
+                    </tr>
+                    <tr>
+                        <td>Difficulty (Easy: Medium: Hard)</td>
+                        <td>27%:48%:25%</td>
+                    </tr>
+                    <tr>
+                        <td>Total images</td>
+                        <td>6061</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 和现有基准的对比表格 -->
+            <h3 style="font-size: 1.2em; margin: 20px 0 10px 0;">Comparison with Existing Benchmarks</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Benchmarks</th>
+                        <th>Language</th>
+                        <th>Multi-image</th>
+                        <th>Avg Question length</th>
+                        <th>Subject Number</th>
+                        <th>Size</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Benchmark 1</td>
+                        <td>EN</td>
+                        <td>✗</td>
+                        <td>77.1</td>
+                        <td>7</td>
+                        <td>1K</td>
+                        <td>Synthesized</td>
+                    </tr>
+                    <tr>
+                        <td>Benchmark 2</td>
+                        <td>EN</td>
+                        <td>✗</td>
+                        <td>37.1</td>
+                        <td>1</td>
+                        <td>0.7K</td>
+                        <td>Internet</td>
+                    </tr>
+                    <tr class="best-result">
+                        <td>你的数据集名 (Ours)</td>
+                        <td>EN</td>
+                        <td>✓</td>
+                        <td>80.2</td>
+                        <td>11</td>
+                        <td>2K</td>
+                        <td>Internet&Annotated</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 数据集示例图 -->
+            <div style="margin: 30px 0;">
+                <img src="dataset_examples.png" alt="数据集示例图" style="width: 100%; border: 1px solid #e0e0e0;">
+                <p class="figure-caption">
+                    Sampled examples from our dataset. Each sample contains XXX contexts.
+                </p>
+            </div>
+        </section>
+
+        <!-- ========== 5. 实验结果板块 ========== -->
+        <section class="section">
+            <h2 class="section-title">Experiment Results</h2>
+
+            <!-- 子板块1：难度分解结果 -->
+            <div class="result-subsection">
+                <h3>Main Results</h3>
+                <div class="result-grid">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Models</th>
+                                <th>Easy</th>
+                                <th>Medium</th>
+                                <th>Hard</th>
+                                <th>Overall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Model 1</td>
+                                <td>35.7</td>
+                                <td>37.5</td>
+                                <td>26.6</td>
+                                <td>33.9</td>
+                            </tr>
+                            <tr>
+                                <td>Model 2</td>
+                                <td>40.3</td>
+                                <td>32.7</td>
+                                <td>22.9</td>
+                                <td>32.1</td>
+                            </tr>
+                            <tr>
+                                <td>Human</td>
+                                <td>85.2</td>
+                                <td>78.6</td>
+                                <td>69.3</td>
+                                <td>78.5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <img src="result_figure.png" alt="实验结果图">
+                </div>
+                <p class="figure-caption">(a) Result decomposition across question difficulty levels. (b) Performance Evaluation of Models on different subsets.</p>
+            </div>
+
+            <!-- 子板块2：不同策略对比结果 -->
+            <div class="result-subsection">
+                <h3>Ablation Study</h3>
+                <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Method</th>
-                            <th>Architecture</th>
-                            <th>Accuracy(%,↑)</th>
-                            <!-- 可根据你的指标增减列 -->
+                            <th>Models</th>
+                            <th>Original</th>
+                            <th>CoT</th>
+                            <th>CoT & 2-shot</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- 替换为你的对比实验数据 -->
                         <tr>
-                            <td>Method A[1]</td>
-                            <td>Transformer</td>
-                            <td>46.7</td>
+                            <td>Model 1</td>
+                            <td>29.2</td>
+                            <td>32.6(+3.4)</td>
+                            <td>33.9(+1.3)</td>
                         </tr>
                         <tr>
-                            <td>Method B[2]</td>
-                            <td>TransE + CNN</td>
-                            <td>87.8</td>
-                        </tr>
-                        <tr>
-                            <td>Method C[3]</td>
-                            <td>Transformer</td>
-                            <td>86.8</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td>Ours</td>
-                            <td>Transformer</td>
-                            <td>96.3</td>
+                            <td>Model 2</td>
+                            <td>31.8</td>
+                            <td>30.9(-0.9)</td>
+                            <td>32.1(+1.2)</td>
                         </tr>
                     </tbody>
                 </table>
-
-                <h3 style="margin: 25px 0 8px 0;">Ablation Study</h3>
-                <!-- 消融实验表格，可根据你的内容调整列和行 -->
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Ablate Setting</th>
-                            <th>mAP(%,↑)</th>
-                            <th>Precision(%,↑)</th>
-                            <th>Recall(%,↑)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 替换为你的消融实验数据 -->
-                        <tr>
-                            <td>Base model</td>
-                            <td>88.26</td>
-                            <td>81.52</td>
-                            <td>75.44</td>
-                        </tr>
-                        <tr>
-                            <td>+ Module A</td>
-                            <td>90.48</td>
-                            <td>81.15</td>
-                            <td>76.27</td>
-                        </tr>
-                        <tr>
-                            <td>+ Module B</td>
-                            <td>88.93</td>
-                            <td>85.69</td>
-                            <td>79.16</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td>+ Module A + Module B</td>
-                            <td>91.65</td>
-                            <td>90.11</td>
-                            <td>83.23</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <p class="table-note">(b) Model Performance Evaluation for Original, CoT, and CoT with 2-shot configurations.</p>
             </div>
         </section>
 
-        <!-- 6. Efficiency 效率分析板块（可选，没有可以删掉） -->
+        <!-- ========== 6. 数据示例板块 ========== -->
         <section class="section">
-            <h2 class="section-title">Efficiency</h2>
-            <div class="section-content">
-                <!-- 效率曲线图：把你的效率图命名为 efficiency.png 上传到仓库，替换src -->
-                <div class="efficiency-figure">
-                    <img src="efficiency.png" alt="Efficiency Comparison">
-                    <p class="figure-caption">
-                        在这里填写图注，说明效率对比结果。比如：不同方法在不同目标数量下的推理速度对比，我们的方法在多目标场景下依然保持高速推理。
-                    </p>
+            <h2 class="section-title">Data Examples</h2>
+            <div class="example-list">
+                <!-- 示例1 -->
+                <div class="example-item">
+                    <p><strong>Question:</strong> 在这里填写题目内容，和原网页一致。</p>
+                    <img src="example1.png" alt="示例1图片">
+                    <p class="example-note">Answer: XXX | Subject: XXX | Difficulty: Medium</p>
                 </div>
+                <!-- 示例2 -->
+                <div class="example-item">
+                    <p><strong>Question:</strong> 在这里填写第二个题目内容。</p>
+                    <img src="example2.png" alt="示例2图片">
+                    <p class="example-note">Answer: XXX | Subject: XXX | Difficulty: Hard</p>
+                </div>
+                <!-- 可根据需要新增更多示例 -->
             </div>
         </section>
 
-        <!-- 7. Examples 可视化示例板块 -->
-        <section class="section">
-            <h2 class="section-title">Examples</h2>
-            <div class="section-content">
-                <!-- 可视化示例图：把你的效果图命名为 examples.png 上传到仓库，替换src -->
-                <div class="examples-area">
-                    <img src="examples.png" alt="Visualization Examples">
-                    <p class="figure-caption">
-                        在这里填写图注，说明可视化示例的内容。比如：我们的方法在工程图纸数据集上的可视化结果，准确预测了图纸中电路和表格的对应关系。
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. BibTeX 引用板块 -->
+        <!-- ========== 7. BibTeX 引用板块 ========== -->
         <section class="section" id="bibtex">
             <h2 class="section-title">BibTeX</h2>
-            <div class="section-content">
-                <p>If you find this work useful for your research, please cite our paper:</p>
-                <!-- 替换为你的论文BibTeX引用格式 -->
-                <div class="bibtex-block">
+            <p class="section-content">If you find this work useful for your research, please cite our paper:</p>
+            <div class="bibtex-block">
 <pre>
-@article{你的引用标签,
+@inproceedings{你的引用标签,
   title={你的论文标题},
-  author={作者1和作者2},
-  journal={期刊名/会议名},
+  author={作者1, 作者2, 作者3},
+  booktitle={会议/期刊全称},
+  pages={页码},
   year={年份}
 }
 </pre>
-                </div>
             </div>
         </section>
+
+        <!-- ========== 8. 底部单位logo区 ========== -->
+        <div class="footer-logos">
+            <!-- 替换为你的单位logo，没有可以删掉 -->
+            <img src="logo1.png" alt="单位1logo">
+            <img src="logo2.png" alt="单位2logo">
+        </div>
     </div>
 </body>
 </html>
