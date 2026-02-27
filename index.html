@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DTRT | Project Page</title>
+    <title>MV-MATH: Evaluating Multimodal Math Reasoning in Multi-Visual Contexts</title>
     <style>
+        /* 全局样式重置与基础设置 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
         body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #ffffff;
             color: #212529;
             line-height: 1.6;
@@ -19,6 +20,7 @@
             margin: 0 auto;
             padding: 40px 20px;
         }
+
         /* 标题层级样式 */
         h1 {
             font-size: 28px;
@@ -39,6 +41,7 @@
             font-weight: 600;
             margin: 30px 0 12px;
         }
+
         /* 作者与单位样式 */
         .authors {
             text-align: center;
@@ -62,7 +65,8 @@
             color: #dc3545;
             margin-bottom: 25px;
         }
-        /* 按钮样式 - 新增 */
+
+        /* 新增：PDF/Code/Demo 按钮样式 */
         .buttons {
             display: flex;
             justify-content: center;
@@ -97,6 +101,7 @@
             background-color: #f8f9fa;
             color: #212529;
         }
+
         /* 顶部预览图容器 */
         .top-preview {
             display: flex;
@@ -112,12 +117,14 @@
             border: 1px solid #dee2e6;
             border-radius: 4px;
         }
+
         /* 段落文本 */
         p {
             font-size: 16px;
             margin-bottom: 15px;
             text-align: justify;
         }
+
         /* 表格通用样式 */
         table {
             width: 100%;
@@ -161,6 +168,7 @@
             color: #495057;
             margin: -10px 0 20px;
         }
+
         /* 数据集统计卡片 */
         .stats-grid {
             display: grid;
@@ -173,6 +181,7 @@
             border-radius: 6px;
             padding: 15px;
         }
+
         /* 示例区块 */
         .example-block {
             border: 1px solid #dee2e6;
@@ -208,6 +217,7 @@
             margin: 10px 0;
             border-radius: 4px;
         }
+
         /* 图表容器 */
         .chart-row {
             display: flex;
@@ -232,6 +242,7 @@
             font-size: 14px;
             color: #495057;
         }
+
         /* BibTeX 代码块 */
         pre {
             background-color: #f8f9fa;
@@ -244,6 +255,7 @@
             font-size: 14px;
             line-height: 1.5;
         }
+
         /* 页脚 */
         footer {
             margin-top: 60px;
@@ -261,6 +273,7 @@
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
+
         /* 响应式适配 */
         @media (max-width: 768px) {
             h1 {
@@ -288,20 +301,18 @@
 <body>
     <!-- 页面头部 -->
     <header>
-        <h1>End-to-End Hyper-Relational Information Extraction for Engineering Diagrams via Dynamically Tokenized Relation Transformer</h1>
+        <h1>MV-MATH: Evaluating Multimodal Math Reasoning in Multi-Visual Contexts</h1>
         <div class="authors">
-            <a href="#">Tianyou Bai</a><sup>1,2</sup>,
-            <a href="#">Yan-Ming Zhang</a><sup>1</sup>,
-            <a href="#">Zixiang Zhang</a><sup>1,3</sup>,
-            <a href="#">Jibin Zhou</a><sup>4</sup>,
-            <a href="#">Fei Yin</a><sup>1</sup>,
-            <a href="#">Chenglin Liu</a><sup>1</sup>
+            <a href="#">Peijie Wang</a><sup>1,2</sup>,
+            <a href="#">Zhongzhi Li</a><sup>1,2</sup>,
+            <a href="#">Dekang Ran</a><sup>1,2</sup>,
+            <a href="#">Fei Yin</a><sup>1,2</sup>,
+            <a href="#">Chenglin Liu</a><sup>1,2</sup>
         </div>
         <div class="affiliations">
             <sup>1</sup> MAIS, Institute of Automation of Chinese Academy of Sciences<br>
-            <sup>2</sup> School of Advanced Interdisciplinary Sciences, University of the Chinese Academy of Sciences <br>
-            <sup>3</sup> SIST, ShanghaiTech University<br>
-            <sup>4</sup> Dalian Institute of Chemical Physics, Chinese Academy of Sciences
+            <sup>2</sup> School of Artificial Intelligence, University of Chinese Academy of Sciences
+        </div>
         <div class="conference">CVPR 2025</div>
 
         <!-- 新增：PDF/Code/Demo 按钮区域 -->
@@ -460,126 +471,7 @@
                     <td>30.6</td>
                     <td>35.2</td>
                 </tr>
-                <tr>
-                    <td class="closed-source">GPT-4V</td>
-                    <td>24.5</td>
-                    <td>18.7</td>
-                    <td>31.6</td>
-                    <td>32.4</td>
-                    <td>25.6</td>
-                    <td>26.3</td>
-                    <td>36.3</td>
-                    <td>26.8</td>
-                    <td>43.7</td>
-                    <td>19.3</td>
-                    <td>33.8</td>
-                    <td>35.2</td>
-                </tr>
-                <tr>
-                    <td class="closed-source">Qwen-vl-plus</td>
-                    <td>19.7</td>
-                    <td>17.9</td>
-                    <td>24.1</td>
-                    <td>22.0</td>
-                    <td>16.0</td>
-                    <td>19.9</td>
-                    <td>24.8</td>
-                    <td>15.9</td>
-                    <td>15.2</td>
-                    <td>18.7</td>
-                    <td>31.4</td>
-                    <td>29.4</td>
-                </tr>
-                <tr>
-                    <td>QVQ-72B-Preview</td>
-                    <td>29.3</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td class="open-source">LLaVA-OneVision-Chat-72B</td>
-                    <td>26.2</td>
-                    <td>25.1</td>
-                    <td>32.4</td>
-                    <td>23.9</td>
-                    <td>35.3</td>
-                    <td>28.1</td>
-                    <td>27.2</td>
-                    <td>31.6</td>
-                    <td>31.2</td>
-                    <td>22.6</td>
-                    <td>35.9</td>
-                    <td>35.2</td>
-                </tr>
-                <tr>
-                    <td class="open-source">LLaVA-OneVision-SFT-72B</td>
-                    <td>25.9</td>
-                    <td>24.2</td>
-                    <td>31.3</td>
-                    <td>21.1</td>
-                    <td>23.1</td>
-                    <td>28.9</td>
-                    <td>31.8</td>
-                    <td>32.8</td>
-                    <td>18.7</td>
-                    <td>21.5</td>
-                    <td>39.5</td>
-                    <td>29.4</td>
-                </tr>
-                <tr>
-                    <td class="open-source">LLaVA-OneVision-SI-72B</td>
-                    <td>25.0</td>
-                    <td>24.7</td>
-                    <td>24.3</td>
-                    <td>27.6</td>
-                    <td>27.0</td>
-                    <td>25.3</td>
-                    <td>37.9</td>
-                    <td>24.4</td>
-                    <td>37.1</td>
-                    <td>20.4</td>
-                    <td>31.2</td>
-                    <td>23.5</td>
-                </tr>
-                <tr>
-                    <td class="open-source">Internvl3-8B</td>
-                    <td>24.2</td>
-                    <td>20.4</td>
-                    <td>23.4</td>
-                    <td>25.1</td>
-                    <td>26.8</td>
-                    <td>25.8</td>
-                    <td>40.9</td>
-                    <td>26.9</td>
-                    <td>43.8</td>
-                    <td>18.4</td>
-                    <td>32.4</td>
-                    <td>60.0</td>
-                </tr>
-                <tr>
-                    <td class="open-source">Qwen2.5VL-Instruct-7B</td>
-                    <td>23.7</td>
-                    <td>25.7</td>
-                    <td>27.6</td>
-                    <td>24.6</td>
-                    <td>22.0</td>
-                    <td>19.2</td>
-                    <td>13.6</td>
-                    <td>27.2</td>
-                    <td>37.5</td>
-                    <td>17.4</td>
-                    <td>29.5</td>
-                    <td>40.0</td>
-                </tr>
+                <!-- 更多模型行可以在此处添加 -->
             </tbody>
         </table>
         <p class="table-note">
@@ -633,55 +525,12 @@
                     <td>100</td>
                 </tr>
                 <tr>
-                    <td>Questions in the testmini set</td>
-                    <td>200</td>
-                </tr>
-                <tr>
                     <td>Difficulties (Easy: Medium: Hard)</td>
                     <td>27%:48%:25%</td>
                 </tr>
                 <tr>
                     <td>Total images</td>
                     <td>6061</td>
-                </tr>
-                <tr>
-                    <td>* question with 2 images</td>
-                    <td>979 (48.73%)</td>
-                </tr>
-                <tr>
-                    <td>* question with 3 images</td>
-                    <td>312 (15.53%)</td>
-                </tr>
-                <tr>
-                    <td>* question with 4 images</td>
-                    <td>453 (22.55%)</td>
-                </tr>
-                <tr>
-                    <td>* question with 5 images and above</td>
-                    <td>265(13.39%)</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><strong>Image Relevance</strong></td>
-                </tr>
-                <tr>
-                    <td>* Mutually Dependent questions</td>
-                    <td>1412</td>
-                </tr>
-                <tr>
-                    <td>* Independent questions</td>
-                    <td>597</td>
-                </tr>
-                <tr>
-                    <td>Minimum question length</td>
-                    <td>14</td>
-                </tr>
-                <tr>
-                    <td>Maximum question length</td>
-                    <td>383</td>
-                </tr>
-                <tr>
-                    <td>Average question length</td>
-                    <td>80.17</td>
                 </tr>
             </tbody>
         </table>
@@ -706,171 +555,6 @@
             <div class="img-placeholder">image_1 ~ image_2</div>
             <div class="example-answer">Answer: 12</div>
             <div class="example-meta">Subject:Combinatorics | Difficulty: Medium | Image Relevance: Mutually Dependent</div>
-        </div>
-
-        <div class="example-block">
-            <h4>Free-Form: Multi-Step</h4>
-            <div class="example-question">
-                Question: In an isosceles triangle ABC with AC = BC, point P is a point on side BC. Connect PA, and rotate segment PA clockwise around point P by an angle equal to ∠C, resulting in segment PD<br>
-                (1) As shown in &lt;image_1&gt;, if ∠C= 90° , measure ∠DBA<br>
-                (2) As shown in &lt;image_2&gt;, if C= α, measure ∠DBA.<br>
-                (3) As shown in &lt;image_3&gt;, If ∠C =α, tan α = √2, AC=13, ∠APC =135°. Find the length of AD
-            </div>
-            <div class="img-placeholder">image_1 ~ image_3</div>
-            <div class="example-answer">Answer: (1) 90° (2) ∠DBA=α (3)10√13/13</div>
-            <div class="example-meta">Subject: Analytic Geometry | Difficulty: Hard | Image Relevance: Independent</div>
-        </div>
-
-        <!-- 现有基准对比 -->
-        <h3>Comparison with existing multimodal math benchmarks</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Benchmarks</th>
-                    <th>Language</th>
-                    <th>Multi-image</th>
-                    <th>Avg Question length</th>
-                    <th>Avg Analysis length</th>
-                    <th>Image Relevance Annotation</th>
-                    <th>Subject Number</th>
-                    <th>Size</th>
-                    <th>Source</th>
-                    <th>MC</th>
-                    <th>MS</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Math Vista</td>
-                    <td>EN</td>
-                    <td>✗</td>
-                    <td>77.1</td>
-                    <td>✗</td>
-                    <td>✗</td>
-                    <td>7</td>
-                    <td>1K/6K</td>
-                    <td>Synthesized</td>
-                    <td>✓</td>
-                    <td>✗</td>
-                </tr>
-                <tr>
-                    <td>GeoQA</td>
-                    <td>EN</td>
-                    <td>✗</td>
-                    <td>37.1</td>
-                    <td>58.2</td>
-                    <td>✗</td>
-                    <td>1</td>
-                    <td>0.7K</td>
-                    <td>Internet</td>
-                    <td>✓</td>
-                    <td>✗</td>
-                </tr>
-                <tr>
-                    <td>MATH-Vision</td>
-                    <td>EN</td>
-                    <td>✗</td>
-                    <td>42.4</td>
-                    <td>✗</td>
-                    <td>✗</td>
-                    <td>16</td>
-                    <td>3K</td>
-                    <td>Synthesized</td>
-                    <td>✓</td>
-                    <td>✗</td>
-                </tr>
-                <tr>
-                    <td>MMMU-math</td>
-                    <td>EN</td>
-                    <td>✗</td>
-                    <td>40.8</td>
-                    <td>✗</td>
-                    <td>✗</td>
-                    <td>8</td>
-                    <td>0.5K</td>
-                    <td>Textbook</td>
-                    <td>✓</td>
-                    <td>✗</td>
-                </tr>
-                <tr>
-                    <td>Mathverse-mv</td>
-                    <td>EN</td>
-                    <td>✓</td>
-                    <td>76.9</td>
-                    <td>✗</td>
-                    <td>✗</td>
-                    <td>1</td>
-                    <td>0.8K</td>
-                    <td>Synthesized</td>
-                    <td>✓</td>
-                    <td>✗</td>
-                </tr>
-                <tr>
-                    <td>CMM-math</td>
-                    <td>CN</td>
-                    <td>✓</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>✗</td>
-                    <td>7</td>
-                    <td>0.7K</td>
-                    <td>Internet</td>
-                    <td>✓</td>
-                    <td>✗</td>
-                </tr>
-                <tr>
-                    <td>MV-MATH(Ours)</td>
-                    <td>EN</td>
-                    <td>✓</td>
-                    <td>80.2</td>
-                    <td>150.9</td>
-                    <td>✓</td>
-                    <td>11</td>
-                    <td>2K</td>
-                    <td>Internet&Annotated</td>
-                    <td>✓</td>
-                    <td>✓</td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="table-note">MC: Multiple Choice, FF: Free-form, MS:Multi-Step</p>
-
-        <!-- 分布图表 -->
-        <div class="chart-row">
-            <div class="chart-item">
-                <div class="chart-img">
-                    <div class="img-placeholder" style="height: 250px;">
-                        (a) comparison with existing mathematical benchmarks
-                    </div>
-                </div>
-                <div class="chart-caption">(a) comparison with existing mathematical benchmarks</div>
-            </div>
-            <div class="chart-item">
-                <div class="chart-img">
-                    <div class="img-placeholder" style="height: 250px;">
-                        (b) distribution of question length per question
-                    </div>
-                </div>
-                <div class="chart-caption">(b) distribution of question length per question</div>
-            </div>
-        </div>
-        <div class="chart-row">
-            <div class="chart-item">
-                <div class="chart-img">
-                    <div class="img-placeholder" style="height: 250px;">
-                        (c) distribution of the images per question
-                    </div>
-                </div>
-                <div class="chart-caption">(c) distribution of the images per question</div>
-            </div>
-            <div class="chart-item">
-                <div class="chart-img">
-                    <div class="img-placeholder" style="height: 250px;">
-                        Inner: question type | Middle: difficulty | Outer: subjects
-                    </div>
-                </div>
-                <div class="chart-caption">Dataset distribution sunburst chart</div>
-            </div>
         </div>
     </section>
 
@@ -898,54 +582,6 @@
                 </div>
                 <div class="chart-caption">(b) Original vs CoT vs CoT&2-shot Performance</div>
             </div>
-        </div>
-        <div class="chart-row">
-            <div class="chart-item">
-                <div class="chart-img">
-                    <div class="img-placeholder" style="height: 250px;">
-                        (c) Performance Evaluation of Models on ID and MD Sets
-                    </div>
-                </div>
-                <div class="chart-caption">(c) ID set vs MD set Performance</div>
-            </div>
-            <div class="chart-item">
-                <div class="chart-img">
-                    <div class="img-placeholder" style="height: 250px;">
-                        (d) Comparison of Accuracy with Merge and Sequence Image Inputs
-                    </div>
-                </div>
-                <div class="chart-caption">(d) Image Sequence Input vs Image Merge Input</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 数据示例 -->
-    <section>
-        <h2>Data Examples</h2>
-        <p>More examples from the MV-MATH dataset, covering multiple question types and subjects.</p>
-        <div class="example-block">
-            <div class="example-question">
-                Question: There is a cylindrical wooden block buried in the wall (as shown in Figure (1)). Its diameter is unknown, so it is sawed open (along the cross section) with a saw. (As shown in Figure (2) When the measured depth CE is 1 inch, the sawed width AB is 1 foot, and the diameter CD of the wooden block is_inches. (1 foot =10 inches)
-            </div>
-            <div class="img-placeholder">Figure (1) & Figure (2)</div>
-            <div class="example-meta">Type: Free-form | Subject: Geometry</div>
-        </div>
-        <div class="example-block">
-            <div class="example-question">
-                Question: As shown in Figure 1, a large tree broke and fell during a strong earthquake, with the top of the tree landing 12 meters away from the base and 5 meters above the ground. Figure 2 is a diagram illustrating the tree's breakage. Determine the height of the tree before it broke.<br>
-                A. 20 meters B. 18 meters C. 16 meters D.15 meters
-            </div>
-            <div class="img-placeholder">Figure 1 & Figure 2</div>
-            <div class="example-meta">Type: Multiple-choice | Subject: Geometry</div>
-        </div>
-        <div class="example-block">
-            <div class="example-question">
-                Question: As shown in the figure, in Δ ABC, CD ⊥ BA and CD intersects the extension line of BA at D, DE ⊥ AC at E.<br>
-                (1) As shown in Figure 1, if ∠B =35°, ∠CDE= 60° , find the degree of ∠ACB;<br>
-                (2) As shown in Figure 2, if AC bisects ∠BCD, BF ⊥ AC and BF intersects the extension of CA at F, directly write out the angle equal to ∠ACB (except ∠ACB).
-            </div>
-            <div class="img-placeholder">Figure 1 & Figure 2</div>
-            <div class="example-meta">Type: Multi-step | Subject: Geometry</div>
         </div>
     </section>
 
