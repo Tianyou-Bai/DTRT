@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>项目名称 - Project Page</title>
-    <!-- 引入图标库 (可选，用于显示GitHub图标) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 替换为你的项目名称 -->
+    <title>项目英文名 | Project Page</title>
     <style>
-        /* 全局重置 */
+        /* 全局样式：复刻ViRED极简学术风 */
         * {
             margin: 0;
             padding: 0;
@@ -15,284 +14,392 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f6f8fa;
-            color: #24292e;
+            font-family: 'Helvetica Neue', Arial, 'Times New Roman', SimSun, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
             line-height: 1.6;
+            font-size: 17px;
         }
 
-        /* 容器 */
+        /* 核心容器：居中+宽度限制，适配阅读体验 */
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
 
-        /* 头部 Hero 区域 */
-        .hero {
+        /* 标题区域：居中排版 */
+        .header {
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-
-        /* 按钮组 */
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 24px;
-            background-color: white;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 6px;
+        .project-title {
+            font-size: 32px;
             font-weight: 600;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            line-height: 1.3;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        .author-list {
+            font-size: 18px;
+            margin-bottom: 8px;
         }
 
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid white;
-            color: white;
+        .affiliation-list {
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 15px;
         }
 
-        .btn i {
-            margin-right: 8px;
-        }
-
-        /* Badge 区域 */
-        .badges {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .badge {
-            display: inline-block;
-            margin: 0 5px;
-        }
-
-        /* 内容卡片 */
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .card h2 {
-            color: #667eea;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
+        .paper-status {
+            font-size: 16px;
+            font-style: italic;
+            color: #555555;
             margin-bottom: 20px;
-            font-size: 1.5rem;
         }
 
-        /* 特性列表 */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        .link-group {
+            font-size: 18px;
+            font-weight: 500;
         }
 
-        .feature-item {
-            padding: 20px;
-            border-left: 4px solid #667eea;
-            background: #fafbfc;
-            border-radius: 0 6px 6px 0;
+        .link-group a {
+            color: #003399;
+            text-decoration: none;
+            margin: 0 12px;
         }
 
-        .feature-item h3 {
-            margin-bottom: 10px;
-            color: #24292e;
+        .link-group a:hover {
+            text-decoration: underline;
         }
 
-        /* 图片展示 */
-        .demo-img {
-            width: 100%;
-            border: 1px solid #e1e4e8;
-            border-radius: 6px;
+        /* 通用板块样式 */
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .section-content {
+            text-align: justify;
+            color: #111111;
+        }
+
+        /* 贡献列表 */
+        .contribution-list {
+            padding-left: 25px;
+            margin-top: 10px;
+        }
+
+        .contribution-list li {
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        /* 方法流程图占位 */
+        .method-figure {
+            text-align: center;
             margin: 20px 0;
         }
 
-        /* 代码块样式 */
-        pre {
-            background-color: #282c34;
-            color: #abb2bf;
-            padding: 20px;
-            border-radius: 6px;
-            overflow-x: auto;
-            margin: 15px 0;
+        .method-figure img {
+            max-width: 100%;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
         }
 
-        code {
-            font-family: 'SFMono-Regular', Consolas, "Liberation Mono", Menlo, monospace;
-        }
-
-        /* BibTeX 样式 */
-        .bibtex {
-            background-color: #f6f8fa;
-            border: 1px solid #d1d5da;
-            padding: 15px;
-            font-size: 0.9rem;
-        }
-
-        /* 页脚 */
-        footer {
+        .figure-caption {
+            font-size: 15px;
+            color: #444444;
+            margin-top: 8px;
             text-align: center;
-            margin-top: 50px;
-            color: #586069;
-            font-size: 0.9rem;
         }
 
-        /* 响应式 */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2rem; }
+        /* 表格样式：学术三线表，完全复刻原网页 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        table thead tr {
+            border-top: 2px solid #333333;
+            border-bottom: 1px solid #333333;
+        }
+
+        table tbody tr:last-child {
+            border-bottom: 2px solid #333333;
+        }
+
+        table th, table td {
+            padding: 8px 5px;
+        }
+
+        table .highlight-row {
+            font-weight: 600;
+            background-color: #f8f9fa;
+        }
+
+        /* 效率图占位 */
+        .efficiency-figure {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .efficiency-figure img {
+            max-width: 80%;
+        }
+
+        /* 示例图区域 */
+        .examples-area {
+            margin: 20px 0;
+        }
+
+        .examples-area img {
+            width: 100%;
+            border: 1px solid #dddddd;
+        }
+
+        /* BibTeX代码块 */
+        .bibtex-block {
+            background-color: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        /* 响应式适配：手机端正常显示 */
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 24px;
+            }
+            table {
+                font-size: 14px;
+            }
+            .container {
+                padding: 30px 15px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- 1. 顶部标题、作者、单位、链接区（完全复刻原网页结构） -->
+        <header class="header">
+            <h1 class="project-title">你的项目英文名: 项目副标题（和论文标题保持一致）</h1>
+            
+            <div class="author-list">
+                <!-- 替换为你的作者列表，*标注通讯作者，上标标注单位序号 -->
+                First Author<sup>1</sup>, Second Author<sup>2</sup>, Third Author<sup>3</sup>,
+                Corresponding Author*<sup>1</sup>
+            </div>
+            
+            <div class="affiliation-list">
+                <!-- 替换为作者单位 -->
+                <sup>1</sup>第一单位全称,
+                <sup>2</sup>第二单位全称,
+                <sup>3</sup>第三单位全称
+            </div>
+            
+            <div class="paper-status">
+                <!-- 替换为论文状态：Under Review / Accepted at CVPR 2024 / arXiv preprint 等 -->
+                Under Review
+            </div>
+            
+            <div class="link-group">
+                <!-- 替换为你的论文、代码链接，没有的可以删掉 -->
+                <a href="你的论文PDF链接" target="_blank">Paper</a>
+                <a href="你的GitHub代码仓库链接" target="_blank">Code</a>
+                <a href="#bibtex">BibTeX</a>
+            </div>
+        </header>
 
-<div class="container">
+        <!-- 2. Abstract 摘要板块 -->
+        <section class="section">
+            <h2 class="section-title">Abstract</h2>
+            <div class="section-content">
+                <!-- 替换为你的论文摘要，和论文里的Abstract保持一致即可 -->
+                在这里填写你的论文摘要内容。清晰说明你的研究要解决的问题、现有方法的不足、你提出的方法核心思路、关键实验结果和结论。
+                保持和原网页一致的段落风格，单段落即可，无需分段。
+            </div>
+        </section>
 
-    <!-- 1. Hero 区域：项目名字 + 核心链接 -->
-    <header class="hero">
-        <h1>Project Name</h1>
-        <p>这里用一句话概括您的项目：A New Framework for XXX / 一个用于XX任务的高效工具库</p>
-        
-        <div class="btn-group">
-            <a href="https://github.com/您的用户名/项目仓库" class="btn" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="https://arxiv.org/abs/xx.xxxx" class="btn btn-outline" target="_blank">
-                <i class="fas fa-file-pdf"></i> Paper (arXiv)
-            </a>
-            <a href="#demo" class="btn btn-outline">
-                <i class="fas fa-play-circle"></i> Demo
-            </a>
-        </div>
-    </header>
+        <!-- 3. Summary / Contributions 核心贡献板块 -->
+        <section class="section">
+            <h2 class="section-title">Summary</h2>
+            <div class="section-content">
+                <p>In summary, the contributions of our work are as follows:</p>
+                <ul class="contribution-list">
+                    <!-- 替换为你的论文核心贡献，一般3-5条，和论文里的保持一致 -->
+                    <li>第一条核心贡献，清晰说明你提出的方法/框架/数据集，解决了什么核心问题。</li>
+                    <li>第二条核心贡献，比如你构建了什么数据集、做了什么标注工作，填补了领域的什么空白。</li>
+                    <li>第三条核心贡献，比如你在什么数据集上做了全面的实验验证，和SOTA方法做了对比，取得了什么效果。</li>
+                    <li>第四条核心贡献，比如你做了充分的消融实验，验证了不同模块的有效性，为后续研究提供了什么参考。</li>
+                </ul>
+            </div>
+        </section>
 
-    <!-- 2. Badges (可选：显示Stars, Paper状态等) -->
-    <div class="badges">
-        <!-- 这里的图片链接可以换成 shields.io 的徽章 -->
-        <img src="https://img.shields.io/github/stars/您的用户名/项目仓库?style=social" alt="GitHub Stars" class="badge">
-        <img src="https://img.shields.io/badge/arXiv-xx.xxxx-red.svg" alt="arXiv" class="badge">
-        <img src="https://img.shields.io/badge/Conference-CVPR%202024-blue" alt="Conference" class="badge">
+        <!-- 4. Methodology 方法板块 -->
+        <section class="section">
+            <h2 class="section-title">Methodology</h2>
+            <div class="section-content">
+                <!-- 方法流程图：把你的方法框架图命名为 method.png 上传到仓库，替换src -->
+                <div class="method-figure">
+                    <img src="method.png" alt="Method Pipeline">
+                    <p class="figure-caption">
+                        在这里填写图注，说明你的方法整体流程。比如：你的方法整体框架，主要分为视觉编码器、对象编码器、关系解码器三个核心模块。
+                    </p>
+                </div>
+
+                <!-- 方法细节说明，可根据你的论文内容补充段落，也可以只放流程图+简单说明 -->
+                <p>
+                    在这里补充你的方法细节说明。可以分点描述每个模块的作用，也可以用段落形式说明你的方法核心设计思路、创新点的实现方式。
+                    无需放太多公式，保持网页的简洁性，详细内容引导读者阅读论文即可。
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. Experiments 实验板块 -->
+        <section class="section">
+            <h2 class="section-title">Experiments</h2>
+            <div class="section-content">
+                <h3 style="margin: 15px 0 8px 0;">Comparison to Previous Works</h3>
+                <!-- 和SOTA方法对比的表格，三线表，和原网页完全一致 -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Architecture</th>
+                            <th>Accuracy(%,↑)</th>
+                            <!-- 可根据你的指标增减列 -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 替换为你的对比实验数据 -->
+                        <tr>
+                            <td>Method A[1]</td>
+                            <td>Transformer</td>
+                            <td>46.7</td>
+                        </tr>
+                        <tr>
+                            <td>Method B[2]</td>
+                            <td>TransE + CNN</td>
+                            <td>87.8</td>
+                        </tr>
+                        <tr>
+                            <td>Method C[3]</td>
+                            <td>Transformer</td>
+                            <td>86.8</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td>Ours</td>
+                            <td>Transformer</td>
+                            <td>96.3</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin: 25px 0 8px 0;">Ablation Study</h3>
+                <!-- 消融实验表格，可根据你的内容调整列和行 -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ablate Setting</th>
+                            <th>mAP(%,↑)</th>
+                            <th>Precision(%,↑)</th>
+                            <th>Recall(%,↑)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 替换为你的消融实验数据 -->
+                        <tr>
+                            <td>Base model</td>
+                            <td>88.26</td>
+                            <td>81.52</td>
+                            <td>75.44</td>
+                        </tr>
+                        <tr>
+                            <td>+ Module A</td>
+                            <td>90.48</td>
+                            <td>81.15</td>
+                            <td>76.27</td>
+                        </tr>
+                        <tr>
+                            <td>+ Module B</td>
+                            <td>88.93</td>
+                            <td>85.69</td>
+                            <td>79.16</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td>+ Module A + Module B</td>
+                            <td>91.65</td>
+                            <td>90.11</td>
+                            <td>83.23</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. Efficiency 效率分析板块（可选，没有可以删掉） -->
+        <section class="section">
+            <h2 class="section-title">Efficiency</h2>
+            <div class="section-content">
+                <!-- 效率曲线图：把你的效率图命名为 efficiency.png 上传到仓库，替换src -->
+                <div class="efficiency-figure">
+                    <img src="efficiency.png" alt="Efficiency Comparison">
+                    <p class="figure-caption">
+                        在这里填写图注，说明效率对比结果。比如：不同方法在不同目标数量下的推理速度对比，我们的方法在多目标场景下依然保持高速推理。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Examples 可视化示例板块 -->
+        <section class="section">
+            <h2 class="section-title">Examples</h2>
+            <div class="section-content">
+                <!-- 可视化示例图：把你的效果图命名为 examples.png 上传到仓库，替换src -->
+                <div class="examples-area">
+                    <img src="examples.png" alt="Visualization Examples">
+                    <p class="figure-caption">
+                        在这里填写图注，说明可视化示例的内容。比如：我们的方法在工程图纸数据集上的可视化结果，准确预测了图纸中电路和表格的对应关系。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. BibTeX 引用板块 -->
+        <section class="section" id="bibtex">
+            <h2 class="section-title">BibTeX</h2>
+            <div class="section-content">
+                <p>If you find this work useful for your research, please cite our paper:</p>
+                <!-- 替换为你的论文BibTeX引用格式 -->
+                <div class="bibtex-block">
+<pre>
+@article{你的引用标签,
+  title={你的论文标题},
+  author={作者1和作者2},
+  journal={期刊名/会议名},
+  year={年份}
+}
+</pre>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <!-- 3. 摘要/简介 -->
-    <section class="card">
-        <h2>📖 简介 (Abstract)</h2>
-        <p>
-            在这里详细介绍您的项目。可以复制论文的Abstract部分。
-            比如：我们提出了一种新的方法，用于解决XX领域的XX问题。
-            该方法在XX数据集上取得了SOTA的效果，相比之前的方法提升了X%。
-        </p>
-    </section>
-
-    <!-- 4. 方法亮点/特性 -->
-    <section class="card">
-        <h2>✨ 主要特性 (Key Features)</h2>
-        <div class="features">
-            <div class="feature-item">
-                <h3>特性一</h3>
-                <p>简单描述这个创新点，比如：端到端的训练方式，无需人工干预。</p>
-            </div>
-            <div class="feature-item">
-                <h3>特性二</h3>
-                <p>简单描述这个创新点，比如：速度快，比现有方法快3倍。</p>
-            </div>
-            <div class="feature-item">
-                <h3>特性三</h3>
-                <p>简单描述这个创新点，比如：代码开源，易于复现和扩展。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. 效果展示图 (非常重要) -->
-    <section class="card" id="demo">
-        <h2>🖼️ 效果展示 (Visualization)</h2>
-        <p>把您的论文效果图或Demo截图命名为 demo.png 上传到仓库，替换下面的 src。</p>
-        
-        <!-- 占位图，请替换为您自己的图片路径 -->
-        <img src="demo.png" alt="Demo Image" class="demo-img" style="background-color: #eee; display: flex; align-items: center; justify-content: center; height: 300px; color: #888;">
-        
-        <p style="text-align: center; color: #666; font-size: 0.9rem;">图注：在这里描述这张图展示了什么效果。</p>
-    </section>
-
-    <!-- 6. 安装与使用 -->
-    <section class="card">
-        <h2>🚀 快速开始 (Quick Start)</h2>
-        
-        <h3>安装 (Installation)</h3>
-        <pre><code># 克隆仓库
-git clone https://github.com/您的用户名/项目仓库.git
-cd 项目仓库
-
-# 安装依赖
-pip install -r requirements.txt</code></pre>
-
-        <h3>使用方法 (Usage)</h3>
-        <pre><code># 运行示例代码
-python demo.py --config configs/test.yaml</code></pre>
-    </section>
-
-    <!-- 7. 引用 (如果是论文项目) -->
-    <section class="card">
-        <h2>📝 引用 (Citation)</h2>
-        <p>如果您觉得这个项目对您的研究有帮助，请引用我们的论文：</p>
-        <div class="bibtex">
-            <pre><code>@inproceedings{zhang2024projectname,
-  title={Project Title},
-  author={Author 1 and Author 2 and Author 3},
-  booktitle={Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year={2024}
-}</code></pre>
-        </div>
-    </section>
-
-    <!-- 8. 联系方式 -->
-    <section class="card">
-        <h2>📧 联系方式 (Contact)</h2>
-        <ul>
-            <li>如有问题，请提 Issue：<a href="https://github.com/您的用户名/项目仓库/issues" target="_blank">GitHub Issues</a></li>
-            <li>或者联系作者：your.email [at] example.edu</li>
-        </ul>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Your Lab. All rights reserved.</p>
-    </footer>
-
-</div>
-
 </body>
 </html>
