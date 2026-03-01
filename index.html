@@ -216,14 +216,6 @@
                   <span>Paper</span>
                 </a>
               </span>
-              <!-- arXiv Link -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2502.20808"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="ai ai-arxiv"></i></span>
-                  <span>arXiv</span>
-                </a>
-              </span>
               <!-- Code Link -->
               <span class="link-block">
                 <a href="https://github.com/eternal8080/MV-MATH"
@@ -232,12 +224,12 @@
                   <span>code</span>
                 </a>
               </span>
-              <!-- Dataset Link -->
+              <!-- Demo Link -->
               <span class="link-block">
                 <a href="https://huggingface.co/datasets/PeijieWang/MV-MATH"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="far fa-images"></i></span>
-                  <span>dataset</span>
+                  <span>demo</span>
                 </a>
               </span>
             </div>
@@ -269,7 +261,7 @@
         <h2 class="title is-3">Introduction</h2>
         <div class="content has-text-justified">
           <p>
-            Multimodal Large Language Models (MLLMs) have shown promising capabilities in mathematical reasoning within visual contexts across various datasets. However, most existing multimodal math benchmarks are limited to single-visual contexts, which diverges from the multi-visual scenarios commonly encountered in real-world mathematical applications. To address this gap, we introduce <b>MV-MATH</b>: a meticulously curated dataset of 2,009 high-quality mathematical problems. Each problem integrates multiple images interleaved with text, derived from authentic K-12 scenarios, and enriched with detailed annotations. <b>MV-MATH</b> includes multiple-choice, free-form, and multi-step questions, covering 11 subject areas across 3 difficulty levels, and serves as a comprehensive and rigorous benchmark for assessing MLLMs’ mathematical reasoning in multi-visual contexts. Through extensive experimentation, we observe that MLLMs encounter substantial challenges in multi-visual math tasks, with a considerable performance gap relative to human capabilities on <b>MV-MATH</b>. Furthermore, we analyze the performance and error patterns of various models, providing insights into MLLMs' mathematical reasoning capabilities within multi-visual settings.          
+            Engineering diagrams are the core carriers of technical information in industrial contexts, where the pressing demand for their digitization from industrial sectors has driven great advancements in related research domains. However, existing research still suffers from three limitations. Firstly, the detection of symbols, lines, and texts typically involves multiple independent models, resulting in cumbersome workflows. In addition, high-resolution diagrams often impose an excessive computational cost on existing models. Moreover, parsing frameworks solely based on object detection can merely localize component positions, yet fail to capture the topological connection semantics and structured knowledge among components, thus offering limited convenience for industrial applications. To address these issues, we propose an end-to-end information extraction framework based on the Dynamically Tokenized Relation Transformer (DTRT), which can dynamically reduce received image tokens, filter redundant information, and efficiently extract structural knowledge to construct hyper-relational knowledge graphs. We practiced our model on piping and instrumentation diagrams (P&IDs) and electrical diagrams (EDs): the former are widely used in chemical engineering enterprises, while the latter are employed to describe circuit systems. DTRT achieves an R@1000 accuracy of 94.84% on PIDs and R@200 accuracy of 92.52% on EDs with a significantly reduced computational cost.       
           </p>
         </div>
       </div>
