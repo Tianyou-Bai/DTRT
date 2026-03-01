@@ -1,629 +1,1078 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MV-MATH: Evaluating Multimodal Math Reasoning in Multi-Visual Contexts</title>
-    <style>
-        /* 全局样式重置与基础设置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #ffffff;
-            color: #212529;
-            line-height: 1.6;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+  <meta charset="utf-8">
+  <meta name="description" content="MV-MATH: Evaluating Multimodal Math Reasoning in Multi-Visual Contexts">
+  <meta name="keywords" content="MLLMs, MV-MATH">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MV-MATH: Evaluating Multimodal Math Reasoning in Multi-Visual Contexts</title>
 
-        /* 标题层级样式 */
-        h1 {
-            font-size: 28px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-        h2 {
-            font-size: 24px;
-            font-weight: 600;
-            margin: 40px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e9ecef;
-        }
-        h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin: 30px 0 12px;
-        }
+  <!-- 替换为CDN链接，确保外部依赖可访问 -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.4/dist/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
-        /* 作者与单位样式 */
-        .authors {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        .authors a {
-            color: #212529;
-            text-decoration: none;
-        }
-        .affiliations {
-            text-align: center;
-            font-size: 16px;
-            color: #495057;
-            margin-bottom: 15px;
-        }
-        .conference {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-            color: #dc3545;
-            margin-bottom: 25px;
-        }
+  <!-- 内联原站核心样式（leaderboard.css + index.css） -->
+  <style>
+    /* leaderboard.css 核心样式 */
+    .js-sort-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .js-sort-table th, .js-sort-table td {
+      border: 1px solid #ddd;
+      padding: 8px 6px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .js-sort-table th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .best-score-text {
+      font-weight: 600;
+    }
+    .mt-3 {
+      margin-top: 1rem;
+    }
 
-        /* 新增：PDF/Code/Demo 按钮样式 */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 35px;
-            flex-wrap: wrap;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background-color: #212529;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            border: 1px solid #212529;
-        }
-        .btn:hover {
-            background-color: #495057;
-            border-color: #495057;
-            transform: translateY(-1px);
-        }
-        .btn-outline {
-            background-color: #ffffff;
-            color: #212529;
-        }
-        .btn-outline:hover {
-            background-color: #f8f9fa;
-            color: #212529;
-        }
+    /* index.css 核心样式 */
+    .publication-title {
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .publication-authors {
+      margin: 1rem 0;
+    }
+    .author-block {
+      display: inline-block;
+      margin: 0 0.5rem 0.5rem 0;
+    }
+    .paper-block {
+      margin-top: 0.5rem;
+      display: block;
+    }
+    .publication-links {
+      margin-top: 1.5rem;
+    }
+    .link-block {
+      display: inline-block;
+      margin: 0 0.5rem 0.5rem 0;
+    }
+    .button.is-rounded {
+      border-radius: 290486px;
+    }
+    .button.is-dark {
+      background-color: #363636;
+      color: #fff;
+    }
+    .button.is-dark:hover {
+      background-color: #4a4a4a;
+    }
+    .hero.teaser {
+      padding: 2rem 0;
+    }
+    .section {
+      padding: 3rem 1.5rem;
+    }
+    .hero.is-light {
+      background-color: #f5f5f5;
+    }
+    .hero.is-small .hero-body {
+      padding: 2rem 1.5rem;
+    }
+    .mathvista {
+      color: #363636;
+    }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+    }
+    .results-carousel .box {
+      margin: 1rem;
+    }
+    .org-banner {
+      margin: 0 auto;
+      display: block;
+      object-fit: contain;
+    }
+    #org-banners {
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 2rem 0;
+    }
+    .footer {
+      background-color: transparent;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid #e6e6e6;
+    }
+    /* 响应式适配 */
+    @media (max-width: 768px) {
+      .js-sort-table {
+        font-size: 12px;
+      }
+      .org-banner {
+        width: 200px !important;
+        height: 100px !important;
+      }
+      .link-block {
+        display: block;
+        margin: 0.5rem auto;
+      }
+    }
+  </style>
 
-        /* 顶部预览图容器 */
-        .top-preview {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .preview-img {
-            max-width: 48%;
-            height: auto;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-        }
+  <!-- JS依赖 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.4/dist/js/bulma-slider.min.js"></script>
 
-        /* 段落文本 */
-        p {
-            font-size: 16px;
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        /* 表格通用样式 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 14px;
-            overflow-x: auto;
-            display: block;
-        }
-        table th, table td {
-            border: 1px solid #dee2e6;
-            padding: 8px 6px;
-            text-align: center;
-            white-space: nowrap;
-        }
-        table th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-        }
-        .gold {
-            color: #ffc107;
-            font-weight: 700;
-        }
-        .silver {
-            color: #6c757d;
-            font-weight: 700;
-        }
-        .bronze {
-            color: #cd7f32;
-            font-weight: 700;
-        }
-        .closed-source {
-            color: #dc3545;
-        }
-        .open-source {
-            color: #0d6efd;
-        }
-        /* 表格说明文本 */
-        .table-note {
-            font-size: 14px;
-            color: #495057;
-            margin: -10px 0 20px;
-        }
-
-        /* 数据集统计卡片 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .stats-card {
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 15px;
-        }
-
-        /* 示例区块 */
-        .example-block {
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 20px 0;
-            background-color: #f8f9fa;
-        }
-        .example-question {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        .example-answer {
-            font-size: 15px;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-        .example-meta {
-            font-size: 14px;
-            color: #495057;
-            margin-top: 5px;
-        }
-        .img-placeholder {
-            width: 100%;
-            max-width: 400px;
-            height: 200px;
-            background-color: #e9ecef;
-            border: 1px dashed #adb5bd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-            margin: 10px 0;
-            border-radius: 4px;
-        }
-
-        /* 图表容器 */
-        .chart-row {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0;
-        }
-        .chart-item {
-            max-width: 48%;
-            text-align: center;
-        }
-        .chart-img {
-            width: 100%;
-            height: auto;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-        .chart-caption {
-            font-size: 14px;
-            color: #495057;
-        }
-
-        /* BibTeX 代码块 */
-        pre {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 20px;
-            overflow-x: auto;
-            margin: 20px 0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        /* 页脚 */
-        footer {
-            margin-top: 60px;
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #e9ecef;
-            font-size: 14px;
-            color: #6c757d;
-        }
-        .footer-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        /* 响应式适配 */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 22px;
+  <!-- 表格排序脚本 -->
+  <script>
+    // 简化版表格排序功能（保留核心交互）
+    document.addEventListener('DOMContentLoaded', function() {
+      const table = document.getElementById('results');
+      const headers = table.querySelectorAll('th');
+      
+      headers.forEach(header => {
+        header.addEventListener('click', function() {
+          const column = this.cellIndex;
+          const rows = Array.from(table.querySelectorAll('tr')).slice(1);
+          const isNumber = this.classList.contains('js-sort-number');
+          
+          rows.sort((a, b) => {
+            const aVal = a.cells[column].textContent.trim();
+            const bVal = b.cells[column].textContent.trim();
+            
+            if (isNumber) {
+              const aNum = aVal === '-' ? -Infinity : parseFloat(aVal);
+              const bNum = bVal === '-' ? -Infinity : parseFloat(bVal);
+              return bNum - aNum; // 降序排列
+            } else {
+              return aVal.localeCompare(bVal);
             }
-            h2 {
-                font-size: 20px;
-            }
-            .preview-img, .chart-item {
-                max-width: 100%;
-            }
-            table {
-                font-size: 12px;
-            }
-            .buttons {
-                gap: 10px;
-            }
-            .btn {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-        }
-    </style>
+          });
+          
+          // 重新插入排序后的行
+          const tbody = table.querySelector('tbody') || table;
+          rows.forEach(row => tbody.appendChild(row));
+        });
+      });
+
+      // 初始化轮播
+      bulmaCarousel.attach('#results-carousel', {
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        infinite: true,
+        autoplay: false,
+        navigation: true
+      });
+    });
+  </script>
 </head>
 <body>
-    <!-- 页面头部 -->
-    <header>
-        <h1>MV-MATH: Evaluating Multimodal Math Reasoning in Multi-Visual Contexts</h1>
-        <div class="authors">
-            <a href="#">Peijie Wang</a><sup>1,2</sup>,
-            <a href="#">Zhongzhi Li</a><sup>1,2</sup>,
-            <a href="#">Dekang Ran</a><sup>1,2</sup>,
-            <a href="#">Fei Yin</a><sup>1,2</sup>,
-            <a href="#">Chenglin Liu</a><sup>1,2</sup>
-        </div>
-        <div class="affiliations">
-            <sup>1</sup> MAIS, Institute of Automation of Chinese Academy of Sciences<br>
-            <sup>2</sup> School of Artificial Intelligence, University of Chinese Academy of Sciences
-        </div>
-        <div class="conference">CVPR 2025</div>
 
-        <!-- 新增：PDF/Code/Demo 按钮区域 -->
-        <div class="buttons">
-            <a href="#" class="btn" id="btn-pdf">
-                <span>📄</span>
-                <span>Paper</span>
-            </a>
-            <a href="#" class="btn btn-outline" id="btn-code">
-                <span>💻</span>
-                <span>Code</span>
-            </a>
-            <a href="#" class="btn btn-outline" id="btn-demo">
-                <span>🚀</span>
-                <span>Demo</span>
-            </a>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://arxiv.org/pdf/2402.10104v2">
+        <span class="icon"><i class="fas fa-home"></i></span>
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">More Research</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://mathvista.github.io/"><b>MathVista🔥</b></a>
+          <a class="navbar-item" href="https://mathllm.github.io/mathvision/"><b>Math-Vision🔥</b></a>
+          <a class="navbar-item" href="https://eternal8080.github.io/GeoEval.github.io/"><b>GeoEval🔥</b></a>
+          <a class="navbar-item" href="https://arxiv.org/abs/2407.12023"><b>CMMaTH🔥🔥</b></a>
+          <a class="navbar-item" href="https://arxiv.org/abs/2502.17419"><b>Survey🔥🔥🔥</b></a>
         </div>
+      </div>
+    </div>
+  </div>
+</nav>
 
-        <!-- 顶部性能对比预览图 -->
-        <div class="top-preview">
-            <div class="preview-img">
-                <div class="img-placeholder">
-                    Performance comparison of 6 MLLMs on 11 subjects
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">End-to-End Hyper-Relational Information Extraction for Engineering Diagrams via Dynamically Tokenized Relation Transformer</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://scholar.google.com.hk/citations?user=jUitttEAAAAJ&hl=zh-CN">Peijie Wang</a><sup>1,2</sup>,</span>
+            <span class="author-block"><a href="https://zzli2022.github.io/">Zhongzhi Li</a><sup>1,2</sup>,</span>
+            <span class="author-block"><a href="">Dekang Ran</a><sup>1,2</sup>,</span>
+            <span class="author-block"><a href="https://nlpr.ia.ac.cn/pal/People/YinFei.html">Fei Yin</a><sup>1,2</sup>,</span>
+            <span class="author-block"><a href="https://nlpr.ia.ac.cn/liucl/">Chenglin Liu</a><sup>1,2</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>MAIS, Institute of Automation of Chinese Academy of Sciences</span>
+            <span class="author-block"><sup>2</sup>School of Artificial Intelligence, University of Chinese Academy of Sciences</span>
+            <br>
+            <span class="paper-block"><b style="color:#f41c1c">CVPR 2025</b></span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link -->
+              <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Wang_MV-MATH_Evaluating_Multimodal_Math_Reasoning_in_Multi-Visual_Contexts_CVPR_2025_paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- arXiv Link -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2502.20808"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link -->
+              <span class="link-block">
+                <a href="https://github.com/eternal8080/MV-MATH"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>code</span>
+                </a>
+              </span>
+              <!-- Dataset Link -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/PeijieWang/MV-MATH"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="far fa-images"></i></span>
+                  <span>dataset</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="content has-text-centered">
+      <!-- 图片占位符，替换为实际图片路径 -->
+      <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
+        <p>Performance comparison of six Multimodal Large Language Models(MLLMs) on our proposed MV-MATH dataset</p>
+      </div>
+      <p> Performance comparison of six Multimodal Large Language Models(MLLMs) on our proposed MV-MATH dataset across 11
+        subjects(left) and 3 question types(right). SAR: Step Accuracy Rate, QCR: Question Completeness Rate.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh;">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+            Multimodal Large Language Models (MLLMs) have shown promising capabilities in mathematical reasoning within visual contexts across various datasets. However, most existing multimodal math benchmarks are limited to single-visual contexts, which diverges from the multi-visual scenarios commonly encountered in real-world mathematical applications. To address this gap, we introduce <b>MV-MATH</b>: a meticulously curated dataset of 2,009 high-quality mathematical problems. Each problem integrates multiple images interleaved with text, derived from authentic K-12 scenarios, and enriched with detailed annotations. <b>MV-MATH</b> includes multiple-choice, free-form, and multi-step questions, covering 11 subject areas across 3 difficulty levels, and serves as a comprehensive and rigorous benchmark for assessing MLLMs’ mathematical reasoning in multi-visual contexts. Through extensive experimentation, we observe that MLLMs encounter substantial challenges in multi-visual math tasks, with a considerable performance gap relative to human capabilities on <b>MV-MATH</b>. Furthermore, we analyze the performance and error patterns of various models, providing insights into MLLMs' mathematical reasoning capabilities within multi-visual settings.          
+          </p>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+        <h2 class="title is-3" id="leaderboard_test">Leaderboard on MV-MATH</h2>
+        <div class="content">
+          <p class="mt-3">Accuracy scores of models on our <b>MV-MATH</b> benchmark</p>
+
+          <table class="js-sort-table" id="results">
+            <tr>
+              <th class="js-sort-number">Model</th>
+              <th class="js-sort-number">Overall</th>
+              <th class="js-sort-number">AG</th>
+              <th class="js-sort-number">Algebra</th>
+              <th class="js-sort-number">MG</th>
+              <th class="js-sort-number">Combinatorics</th>
+              <th class="js-sort-number">TG</th>
+              <th class="js-sort-number">Logic</th>
+              <th class="js-sort-number">SG</th>
+              <th class="js-sort-number">Arithmetic</th>     
+              <th class="js-sort-number">CG</th>
+              <th class="js-sort-number">DG</th>
+              <th class="js-sort-number">Statistics</th>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #C6011F">Seed1.5-VL (thinking)🥇</b></td>
+              <td><b class="best-score-text">72.9</b></td>
+              <td><b class="best-score-text">80.6</b></td>
+              <td><b class="best-score-text">79.5</b></td>
+              <td><b class="best-score-text">69.8</b></td>
+              <td><b class="best-score-text">70.7</b></td>
+              <td><b class="best-score-text">68.3</b></td>
+              <td><b class="best-score-text">77.3</b></td>
+              <td><b class="best-score-text">74.5</b></td>
+              <td><b class="best-score-text">94.8</b></td>
+              <td><b class="best-score-text">64.9</b></td>
+              <td><b class="best-score-text">74.1</b></td>
+              <td><b class="best-score-text">80.0</b></td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #C6011F">Qwen-vl-max🥈</b></td>
+              <td>42.4</td>
+              <td>44.4</td>
+              <td>51.5</td>
+              <td>42.2</td>
+              <td>41.5</td>
+              <td>41.1</td>
+              <td>40.9</td>
+              <td>47.6</td>
+              <td>56.2</td>
+              <td>28.8</td>
+              <td>46.8</td>
+              <td>60.0</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">Qwen2.5VL-Instruct-32B🥉</b></td>
+              <td>37.1</td>
+              <td>36.2</td>
+              <td>43.1</td>
+              <td>38.2</td>
+              <td>48.8</td>
+              <td>33.1</td>
+              <td>40.9</td>
+              <td>43.8</td>
+              <td>62.5</td>
+              <td>25.5</td>
+              <td>42.4</td>
+              <td>60.0</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #C6011F">Claude-3.5</b></td>
+              <td>33.9</td>
+              <td>32.7</td>
+              <td>38.1</td>
+              <td>34.3</td>
+              <td>46.7</td>
+              <td>33.3</td>
+              <td>29.8</td>
+              <td>36.3</td>
+              <td>54.2</td>
+              <td>27.0</td>
+              <td>38.2</td>
+              <td>41.1</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #C6011F">GPT-4o</b></td>
+              <td>32.1</td>
+              <td>28.7</td>
+              <td>36.7</td>
+              <td>34.4</td>
+              <td>39.4</td>
+              <td>30.6</td>
+              <td>29.8</td>
+              <td>38.2</td>
+              <td>41.7</td>
+              <td>20.8</td>
+              <td>44.3</td>
+              <td>47.0</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #C6011F">Gemini-1.5-Pro</b></td>
+              <td>29.1</td>
+              <td>29.9</td>
+              <td>32.9</td>
+              <td>28.3</td>
+              <td>28.0</td>
+              <td>30.5</td>
+              <td>40.5</td>
+              <td>33.9</td>
+              <td>42.7</td>
+              <td>21.7</td>
+              <td>30.6</td>
+              <td>35.2</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #C6011F">GPT-4V</b></td>
+              <td>24.5</td>
+              <td>18.7</td>
+              <td>31.6</td>
+              <td>32.4</td>
+              <td>25.6</td>
+              <td>26.3</td>
+              <td>36.3</td>
+              <td>26.8</td>
+              <td>43.7</td>
+              <td>19.3</td>
+              <td>33.8</td>
+              <td>35.2</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #C6011F">Qwen-vl-plus</b></td>
+              <td>19.7</td>
+              <td>17.9</td>
+              <td>24.1</td>
+              <td>22.0</td>
+              <td>16.0</td>
+              <td>19.9</td>
+              <td>24.8</td>
+              <td>15.9</td>
+              <td>15.2</td>
+              <td>18.7</td>
+              <td>31.4</td>
+              <td>29.4</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">QVQ-72B-Preview</b></td>
+              <td>29.3</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-OneVision-Chat-72B</b></td>
+              <td>26.2</td>
+              <td>25.1</td>
+              <td>32.4</td>
+              <td>23.9</td>
+              <td>35.3</td>
+              <td>28.1</td>
+              <td>27.2</td>
+              <td>31.6</td>
+              <td>31.2</td>
+              <td>22.6</td>
+              <td>35.9</td>
+              <td>35.2</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-OneVision-SFT-72B</b></td>
+              <td>25.9</td>
+              <td>24.2</td>
+              <td>31.3</td>
+              <td>21.1</td>
+              <td>23.1</td>
+              <td>28.9</td>
+              <td>31.8</td>
+              <td>32.8</td>
+              <td>18.7</td>
+              <td>21.5</td>
+              <td>39.5</td>
+              <td>29.4</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-OneVision-SI-72B</b></td>
+              <td>25.0</td>
+              <td>24.7</td>
+              <td>24.3</td>
+              <td>27.6</td>
+              <td>27.0</td>
+              <td>25.3</td>
+              <td>37.9</td>
+              <td>24.4</td>
+              <td>37.1</td>
+              <td>20.4</td>
+              <td>31.2</td>
+              <td>23.5</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">Internvl3-8B</b></td>
+              <td>24.2</td>
+              <td>20.4</td>
+              <td>23.4</td>
+              <td>25.1</td>
+              <td>26.8</td>
+              <td>25.8</td>
+              <td>40.9</td>
+              <td>26.9</td>
+              <td>43.8</td>
+              <td>18.4</td>
+              <td>32.4</td>
+              <td>60.0</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">Qwen2.5VL-Instruct-7B</b></td>
+              <td>23.7</td>
+              <td>25.7</td>
+              <td>27.6</td>
+              <td>24.6</td>
+              <td>22.0</td>
+              <td>19.2</td>
+              <td>13.6</td>
+              <td>27.2</td>
+              <td>37.5</td>
+              <td>17.4</td>
+              <td>29.5</td>
+              <td>40.0</td>
+            </tr>
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-OneVision-Chat-7B</b></td>
+              <td>19.1</td>
+              <td>19.6</td>
+              <td>20.4</td>
+              <td>21.4</td>
+              <td>14.6</td>
+              <td>18.8</td>
+              <td>4.5</td>
+              <td>20.4</td>
+              <td>43.7</td>
+              <td>16.7</td>
+              <td>28.9</td>
+              <td>29.4</td>
+            </tr>          
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-OneVision-SFT-7B</b></td>
+              <td>18.8</td>
+              <td>18.2</td>
+              <td>20.3</td>
+              <td>22.3</td>
+              <td>17.3</td>
+              <td>20.1</td>
+              <td>9.0</td>
+              <td>15.8</td>
+              <td>43.1</td>
+              <td>15.8</td>
+              <td>27.3</td>
+              <td>23.5</td>
+            </tr>    
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-OneVision-SI-7B</b></td>
+              <td>17.2</td>
+              <td>16.1</td>
+              <td>19.5</td>
+              <td>13.2</td>
+              <td>16.0</td>
+              <td>19.5</td>
+              <td>12.6</td>
+              <td>15.0</td>
+              <td>36.5</td>
+              <td>13.2</td>
+              <td>31.3</td>
+              <td>13.6</td>
+            </tr>      
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">Qwen2VL-Instruct-7B</b></td>
+              <td>16.5</td>
+              <td>14.2</td>
+              <td>18.6</td>
+              <td>14.8</td>
+              <td>17.0</td>
+              <td>21.9</td>
+              <td>22.7</td>
+              <td>17.2</td>
+              <td>31.2</td>
+              <td>16.1</td>
+              <td>25.1</td>
+              <td>23.5</td>
+            </tr>           
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">Mantis-siglip-8B</b></td>
+              <td>15.8</td>
+              <td>17.9</td>
+              <td>17.7</td>
+              <td>17.9</td>
+              <td>14.6</td>
+              <td>20.4</td>
+              <td>22.7</td>
+              <td>12.1</td>
+              <td>18.7</td>
+              <td>10.8</td>
+              <td>32.3</td>
+              <td>17.6</td>
+            </tr>        
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-NeXT-Interleave-7B</b></td>
+              <td>14.7</td>
+              <td>14.0</td>
+              <td>15.5</td>
+              <td>15.2</td>
+              <td>17.0</td>
+              <td>18.2</td>
+              <td>18.1</td>
+              <td>16.3</td>
+              <td>6.2</td>
+              <td>14.1</td>
+              <td>24.4</td>
+              <td>23.5</td>
+            </tr>        
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">Deepseek-VL-7B</b></td>
+              <td>14.5</td>
+              <td>14.8</td>
+              <td>20.2</td>
+              <td>10.8</td>
+              <td>17.0</td>
+              <td>19.8</td>
+              <td>9.0</td>
+              <td>15.1</td>
+              <td>18.7</td>
+              <td>10.9</td>
+              <td>26.6</td>
+              <td>29.4</td>
+            </tr>         
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">Llama-3.2-Vision-Instruct-11B</b></td>
+              <td>14.4</td>
+              <td>15.0</td>
+              <td>15.4</td>
+              <td>16.2</td>
+              <td>23.1</td>
+              <td>15.6</td>
+              <td>18.1</td>
+              <td>11.9</td>
+              <td>31.2</td>
+              <td>14.3</td>
+              <td>25.1</td>
+              <td>17.6</td>
+            </tr>     
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">InternVL-Chat-8B</b></td>
+              <td>14.4</td>
+              <td>14.1</td>
+              <td>20.4</td>
+              <td>17.5</td>
+              <td>19.5</td>
+              <td>19.6</td>
+              <td>27.2</td>
+              <td>13.0</td>
+              <td>31.2</td>
+              <td>9.9</td>
+              <td>20.1</td>
+              <td>23.5</td>
+            </tr>    
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">InternLM-XComposer2.5-VL-7B</b></td>
+              <td>13.1</td>
+              <td>12.2</td>
+              <td>12.6</td>
+              <td>13.2</td>
+              <td>24.3</td>
+              <td>20.6</td>
+              <td>36.3</td>
+              <td>9.4</td>
+              <td>18.7</td>
+              <td>11.1</td>
+              <td>23.7</td>
+              <td>17.6</td>
+            </tr> 
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">VILA-13B</b></td>
+              <td>12.0</td>
+              <td>11.5</td>
+              <td>11.0</td>
+              <td>11.0</td>
+              <td>12.1</td>
+              <td>14.4</td>
+              <td>18.1</td>
+              <td>13.2</td>
+              <td>37.5</td>
+              <td>10.6</td>
+              <td>20.8</td>
+              <td>5.8</td>
+            </tr> 
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-v1.5-7B</b></td>
+              <td>10.3</td>
+              <td>9.3</td>
+              <td>11.7</td>
+              <td>11.2</td>
+              <td>9.7</td>
+              <td>12.8</td>
+              <td>13.6</td>
+              <td>10.2</td>
+              <td>0.0</td>
+              <td>7.7</td>
+              <td>23.7</td>
+              <td>11.7</td>
+            </tr> 
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">LLaVA-v1.5-13B</b></td>
+              <td>5.0</td>
+              <td>4.8</td>
+              <td>6.8</td>
+              <td>4.1</td>
+              <td>4.8</td>
+              <td>8.7</td>
+              <td>9.0</td>
+              <td>3.5</td>
+              <td>12.5</td>
+              <td>5.1</td>
+              <td>5.0</td>
+              <td>11.7</td>
+            </tr> 
+            <tr>
+              <td><b class="best-score-text" style="color: #0a83f4">Math-LLaVA-13B</b></td>
+              <td>3.0</td>
+              <td>1.6</td>
+              <td>6.9</td>
+              <td>4.7</td>
+              <td>4.8</td>
+              <td>2.9</td>
+              <td>0.0</td>
+              <td>3.2</td>
+              <td>18.7</td>
+              <td>6.6</td>
+              <td>2.1</td>
+              <td>5.8</td>
+            </tr> 
+          </table>
+
+          <b>Models:</b> <b class="best-score-text" style="color: #C6011F">Closed-source</b> models are highlighted in red, while <b class="best-score-text" style="color: #0a83f4">open-source</b> models are highlighted in blue.
+          <br>
+          <b>Mathematical Subjects:</b> AG: Analytic Geometry, MG: Metric Geometry, TG: Transformation Geometry, SG: Solid Geometry, CG: Combinatorial Geometry, DG: Descriptive Geometry.
+          <br>
+          <div>
+            <p>🚨 For more details, please refer to <a href="https://arxiv.org/abs/2502.20808">this link</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATASET SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista">
+      <span class="mathvista" style="vertical-align: middle">MV-MATH Dataset</span>
+    </h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>MV-MATH</b> is a meticulously annotated dataset designed to evaluate the mathematical reasoning capabilities of MLLMs in <b>multi-visual</b> contexts. Each sample in MV-MATH consists of interleaved multi-image and text. It comprises 2,009 multi-image questions, with some questions containing up to 8 images. It includes three types: multiple-choice, free-form and multi-step questions.           
+            <br><br>
+            <b>MV-MATH</b> is organized into 11 subjects over 3 difficulty levels, including <em>Analytic Geometry, Algebra, Metric Geometry, Combinatorics, Transformation Geometry, Logic, Solid Geometry, Arithmetic, Combinatorial Geometry, Descriptive Geometry</em> and <em>Statistics</em>, covering a range of scenarios from the K-12 mathematics curriculum.
+            <br><br>
+            Based on image relevance, we categorize MV-MATH into two subsets: a <b>mutually dependent set (MD)</b>, where images are interrelated and understanding one image necessitates information from another; and an <b>independent set (ID)</b>, where images are unrelated and can be interpreted independently without reference to other images.
+            <br><br>
+          </p>
+
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <!-- 图片占位符 -->
+                <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
+                  <p>Sampled MV-MATH examples from each question type</p>
                 </div>
+                <p> Sampled <b>MV-MATH</b> examples from each question type. Each sample contains a multi-visual contexts.</p>
+              </div>
             </div>
-            <div class="preview-img">
-                <div class="img-placeholder">
-                    Performance comparison on 3 question types<br>
-                    SAR: Step Accuracy Rate, QCR: Question Completeness Rate
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <!-- 图片占位符 -->
+                <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
+                  <p>Comparison with existing multimodal math benchmarks</p>
                 </div>
+                <p>Comparison with existing multimodal math benchmarks. MC: Multiple Choice, FF: Free-form, MS:Multi-Step</p>
+              </div>
             </div>
-        </div>
-    </header>
-
-    <!-- 介绍部分 -->
-    <section>
-        <h2>Introduction</h2>
-        <p>
-            Multimodal Large Language Models (MLLMs) have shown promising capabilities in mathematical reasoning within visual contexts across various datasets. However, most existing multimodal math benchmarks are limited to single-visual contexts, which diverges from the multi-visual scenarios commonly encountered in real-world mathematical applications. To address this gap, we introduce MV-MATH: a meticulously curated dataset of 2,009 high-quality mathematical problems. Each problem integrates multiple images interleaved with text, derived from authentic K-12 scenarios, and enriched with detailed annotations.
-        </p>
-        <p>
-            MV-MATH includes multiple-choice, free-form, and multi-step questions, covering 11 subject areas across 3 difficulty levels, and serves as a comprehensive and rigorous benchmark for assessing MLLMs’ mathematical reasoning in multi-visual contexts. Through extensive experimentation, we observe that MLLMs encounter substantial challenges in multi-visual math tasks, with a considerable performance gap relative to human capabilities on MV-MATH. Furthermore, we analyze the performance and error patterns of various models, providing insights into MLLMs' mathematical reasoning capabilities within multi-visual settings.
-        </p>
-    </section>
-
-    <!-- 排行榜部分 -->
-    <section>
-        <h2>Leaderboard on MV-MATH</h2>
-        <p class="table-note">Accuracy scores of models on our MV-MATH benchmark</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Model</th>
-                    <th>Overall</th>
-                    <th>AG</th>
-                    <th>Algebra</th>
-                    <th>MG</th>
-                    <th>Combinatorics</th>
-                    <th>TG</th>
-                    <th>Logic</th>
-                    <th>SG</th>
-                    <th>Arithmetic</th>
-                    <th>CG</th>
-                    <th>DG</th>
-                    <th>Statistics</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Seed1.5-VL (thinking)<span class="gold">🥇</span></td>
-                    <td>72.9</td>
-                    <td>80.6</td>
-                    <td>79.5</td>
-                    <td>69.8</td>
-                    <td>70.7</td>
-                    <td>68.3</td>
-                    <td>77.3</td>
-                    <td>74.5</td>
-                    <td>94.8</td>
-                    <td>64.9</td>
-                    <td>74.1</td>
-                    <td>80.0</td>
-                </tr>
-                <tr>
-                    <td>Qwen-vl-max<span class="silver">🥈</span></td>
-                    <td>42.4</td>
-                    <td>44.4</td>
-                    <td>51.5</td>
-                    <td>42.2</td>
-                    <td>41.5</td>
-                    <td>41.1</td>
-                    <td>40.9</td>
-                    <td>47.6</td>
-                    <td>56.2</td>
-                    <td>28.8</td>
-                    <td>46.8</td>
-                    <td>60.0</td>
-                </tr>
-                <tr>
-                    <td>Qwen2.5VL-Instruct-32B<span class="bronze">🥉</span></td>
-                    <td>37.1</td>
-                    <td>36.2</td>
-                    <td>43.1</td>
-                    <td>38.2</td>
-                    <td>48.8</td>
-                    <td>33.1</td>
-                    <td>40.9</td>
-                    <td>43.8</td>
-                    <td>62.5</td>
-                    <td>25.5</td>
-                    <td>42.4</td>
-                    <td>60.0</td>
-                </tr>
-                <tr>
-                    <td class="closed-source">Claude-3.5</td>
-                    <td>33.9</td>
-                    <td>32.7</td>
-                    <td>38.1</td>
-                    <td>34.3</td>
-                    <td>46.7</td>
-                    <td>33.3</td>
-                    <td>29.8</td>
-                    <td>36.3</td>
-                    <td>54.2</td>
-                    <td>27.0</td>
-                    <td>38.2</td>
-                    <td>41.1</td>
-                </tr>
-                <tr>
-                    <td class="closed-source">GPT-4o</td>
-                    <td>32.1</td>
-                    <td>28.7</td>
-                    <td>36.7</td>
-                    <td>34.4</td>
-                    <td>39.4</td>
-                    <td>30.6</td>
-                    <td>29.8</td>
-                    <td>38.2</td>
-                    <td>41.7</td>
-                    <td>20.8</td>
-                    <td>44.3</td>
-                    <td>47.0</td>
-                </tr>
-                <tr>
-                    <td class="closed-source">Gemini-1.5-Pro</td>
-                    <td>29.1</td>
-                    <td>29.9</td>
-                    <td>32.9</td>
-                    <td>28.3</td>
-                    <td>28.0</td>
-                    <td>30.5</td>
-                    <td>40.5</td>
-                    <td>33.9</td>
-                    <td>42.7</td>
-                    <td>21.7</td>
-                    <td>30.6</td>
-                    <td>35.2</td>
-                </tr>
-                <!-- 更多模型行可以在此处添加 -->
-            </tbody>
-        </table>
-        <p class="table-note">
-            Models: Closed-source models are highlighted in red, while open-source models are highlighted in blue.<br>
-            Mathematical Subjects: AG: Analytic Geometry, MG: Metric Geometry, TG: Transformation Geometry, SG: Solid Geometry, CG: Combinatorial Geometry, DG: Descriptive Geometry.
-        </p>
-    </section>
-
-    <!-- 数据集详情 -->
-    <section>
-        <h2>MV-MATH Dataset</h2>
-        <h3>Overview</h3>
-        <p>
-            MV-MATH is a meticulously annotated dataset designed to evaluate the mathematical reasoning capabilities of MLLMs in multi-visual contexts. Each sample in MV-MATH consists of interleaved multi-image and text. It comprises 2,009 multi-image questions, with some questions containing up to 8 images. It includes three types: multiple-choice, free-form and multi-step questions.
-        </p>
-        <p>
-            MV-MATH is organized into 11 subjects over 3 difficulty levels, including Analytic Geometry, Algebra, Metric Geometry, Combinatorics, Transformation Geometry, Logic, Solid Geometry, Arithmetic, Combinatorial Geometry, Descriptive Geometry and Statistics, covering a range of scenarios from the K-12 mathematics curriculum.
-        </p>
-        <p>
-            Based on image relevance, we categorize MV-MATH into two subsets: a mutually dependent set (MD), where images are interrelated and understanding one image necessitates information from another; and an independent set (ID), where images are unrelated and can be interpreted independently without reference to other images.
-        </p>
-
-        <!-- 核心统计表格 -->
-        <h3>Key statistics of MV-MATH</h3>
-        <table style="max-width: 600px; margin: 20px auto;">
-            <thead>
-                <tr>
-                    <th>Statistics</th>
-                    <th>Number</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Total Questions</td>
-                    <td>2009</td>
-                </tr>
-                <tr>
-                    <td>*multiple-choice questions</td>
-                    <td>1109</td>
-                </tr>
-                <tr>
-                    <td>*Free-form questions</td>
-                    <td>900</td>
-                </tr>
-                <tr>
-                    <td>-one-step questions</td>
-                    <td>800</td>
-                </tr>
-                <tr>
-                    <td>-multi-step questions</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>Difficulties (Easy: Medium: Hard)</td>
-                    <td>27%:48%:25%</td>
-                </tr>
-                <tr>
-                    <td>Total images</td>
-                    <td>6061</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- 数据集示例 -->
-        <h3>Sampled MV-MATH examples from each question type</h3>
-        <div class="example-block">
-            <h4>Multiple Choice</h4>
-            <div class="example-question">
-                Question: Unfolding the given square as shown in &lt;image_1&gt;, which of the following could be the flat unfolded pattern? A.&lt;image_2&gt; B.&lt;image_3&gt; C.&lt;image_4&gt; D.&lt;image_5&gt;
-            </div>
-            <div class="img-placeholder">image_1 ~ image_5</div>
-            <div class="example-answer">Answer: B</div>
-            <div class="example-meta">Subject:Solid Geometry | Difficulty: Medium | Image Relevance: Mutually Dependent</div>
-        </div>
-
-        <div class="example-block">
-            <h4>Free-Form: Single-Step</h4>
-            <div class="example-question">
-                Question: On a grid composed of squares with side length 1, each vertex of squares is called a lattice point. A movement from one lattice point to another is √5 units away is called a knight's move. In a 3 × 3 square grid (&lt;image_1&gt;), from point A, a knight's move can reach points B, C,D, E. Given a 25 × 25 square grid (&lt;image_2&gt;), the minimum number of knight's moves to reach the opposite vertex N from the M is
-            </div>
-            <div class="img-placeholder">image_1 ~ image_2</div>
-            <div class="example-answer">Answer: 12</div>
-            <div class="example-meta">Subject:Combinatorics | Difficulty: Medium | Image Relevance: Mutually Dependent</div>
-        </div>
-    </section>
-
-    <!-- 实验结果 -->
-    <section>
-        <h2>Experiment Results</h2>
-        <h3>Main Results</h3>
-        <p>We evaluate model performances across multiple question types, including choice problem set, single-step free-form set, and multi-step problem set (with SAR and QCR metrics). Full results are available in the paper.</p>
-
-        <h3>More Results</h3>
-        <div class="chart-row">
-            <div class="chart-item">
-                <div class="chart-img">
-                    <div class="img-placeholder" style="height: 250px;">
-                        (a) Result decomposition across question difficulty levels
-                    </div>
+          </div>
+          <br><br>
+          You can download the dataset on <a href="https://huggingface.co/datasets/PeijieWang/MV-MATH" target="_blank">Hugging Face Dataset</a>.
+          <br><br>
+          <div class="columns is-centered">
+            <div class="column" style="margin-right: -5rem;">
+              <div class="content has-text-centered">
+                <!-- 图片占位符 -->
+                <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 70%; margin: 0 auto;">
+                  <p>Key statistics of MV-MATH</p>
                 </div>
-                <div class="chart-caption">(a) Result decomposition across question difficulty levels</div>
+                <p>Key statistics of <B>MV-MATH</B>.</p> 
+              </div>
             </div>
-            <div class="chart-item">
-                <div class="chart-img">
-                    <div class="img-placeholder" style="height: 250px;">
-                        (b) Model Performance Evaluation for Original, CoT, and CoT with 2-shot configurations
-                    </div>
+            <div class="column">
+              <div class="content has-text-centered">
+                <!-- 图片占位符 -->
+                <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
+                  <p>MV-MATH data composition</p>
                 </div>
-                <div class="chart-caption">(b) Original vs CoT vs CoT&2-shot Performance</div>
+                <p>
+                  <b>Inner</b>: divided by question type (3 types).<br/>
+                  <b>Middle</b>: divided by difficulty level (3 levels).<br/>
+                  <b>Outer</b>: divided by subjects (11 subjects).
+                </p>
+              </div>
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- BibTeX -->
-    <section>
-        <h2>BibTeX</h2>
-        <pre>
-@inproceedings{wang2025mv,
+          <div class="columns is-centered">
+            <div class="column">
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <!-- 图片占位符 -->
+                  <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
+                    <p>MV-MATH distribution charts</p>
+                  </div>
+                  <p> 
+                    (a) <strong>comparison with existing mathematical benchmarks</strong>, (b) <strong>distribution of question length per question</strong>, (c) <strong>distribution of the images per question</strong>.
+                  </p> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista_other">Experiment Results</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" style="width: 100%;">
+        <h2 class="title is-3">Main Results</h2>
+        <div class="content has-text-justified">
+          <div id="results-carousel" class="carousel results-carousel">  
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 85%; margin: 0 auto;">
+                <p>Model performances across various mathematical subjects</p>
+              </div>
+              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
+                Comparison of model performances across various mathematical subjects. AG: Analytic Geometry, MG: Metric Geometry, TG:
+                Transformation Geometry, SG: Solid Geometry, CG: Combinatorial Geometry, DG: Descriptive Geometry. The first and second highest
+                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
+              </p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 85%; margin: 0 auto;">
+                <p>Model performances on choice problem set</p>
+              </div>
+              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
+                Comparison of model performances across various mathematical subjects on the <b>choice problem set</b>. The first and second highest
+                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
+              </p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 75%; margin: 0 auto;">
+                <p>Model performances on single-step problem set</p>
+              </div>
+              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
+                Comparison of model performances across various mathematical subjects on the <b>single-step problem set</b>. The first and second highest
+                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
+              </p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 75%; margin: 0 auto;">
+                <p>Model performances on multi-step problem set (SAR)</p>
+              </div>
+              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
+                Comparison of model performances across various mathematical subjects on the <b>multi-step problem set(SAR: Step Accuracy Rate)</b>. The first and second highest
+                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
+              </p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 75%; margin: 0 auto;">
+                <p>Model performances on multi-step problem set (QCR)</p>
+              </div>
+              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
+                Comparison of model performances across various mathematical subjects on the <b>multi-step problem set(QCR: Question Completeness Rate)</b>. The first and second highest
+                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <div class="columns is-centered m-6">
+      <div class="column is-full has-text-centered content">
+        <h2 class="title is-3">More Results</h2>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <!-- 图片占位符 -->
+            <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
+              <p>MV-MATH more results</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Data Examples -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista_other">Data Examples</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" style="width: 100%;">
+        <h2 class="title is-3">Data Examples</h2>
+        <div class="content has-text-justified">
+          <div id="results-carousel" class="carousel results-carousel">  
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 65%; margin: 0 auto;">
+                <p>Multiple-choice question example 1</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Multiple-choice question example 2</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Multiple-choice question example 3</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Free-form question example 1</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Free-form questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Free-form question example 2</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Free-form questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Multiple-choice question example 4</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Multi-step question example 1</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Multi-step questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Free-form question example 3</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Free-form questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Free-form question example 4</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Free-form questions.</p>
+            </div>
+            <div class="content has-text-centered">
+              <!-- 图片占位符 -->
+              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
+                <p>Multiple-choice question example 5</p>
+              </div>
+              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+</section>
+
+<!-- BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">BibTeX</h2>
+    <pre><code>@inproceedings{wang2025mv,
   title={Mv-math: Evaluating multimodal math reasoning in multi-visual contexts},
   author={Wang, Peijie and Li, Zhong-Zhi and Yin, Fei and Ran, Dekang and Liu, Cheng-Lin},
   booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
   pages={19541--19551},
   year={2025}
-}
-        </pre>
-    </section>
+}</code></pre>
+  </div>
+</section>
 
-    <!-- 页脚 -->
-    <footer>
-        <div class="footer-logos">
-            <div>
-                <div class="img-placeholder" style="width: 180px; height: 80px;">
-                    Institute of Automation Chinese Academy of Sciences
-                </div>
-                <p>中国科学院自动化研究所</p>
-            </div>
-            <div>
-                <div class="img-placeholder" style="width: 180px; height: 80px;">
-                    University of Chinese Academy of Sciences
-                </div>
-                <p>中国科学院大学</p>
-            </div>
-        </div>
-        <p>© 2025 MV-MATH Team. All Rights Reserved.</p>
-    </footer>
+<section>
+  <div class="section" id="org-banners" style="display:flex">
+    <a href="https://ia.cas.cn/" target="_blank" rel="external">
+      <!-- 机构logo占位符 -->
+      <div style="background-color: #e9ecef; padding: 2rem; border: 1px solid #dee2e6; width: 400px; height: 200px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+        <p>CASIA Logo</p>
+      </div>
+    </a>
+    <a href="https://www.ucas.edu.cn/" target="blank" class="ext-link">
+      <!-- 机构logo占位符 -->
+      <div style="background-color: #e9ecef; padding: 2rem; border: 1px solid #dee2e6; width: 400px; height: 200px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+        <p>UCAS Logo</p>
+      </div>
+    </a>
+  </div>
+</section>
 
-    <!-- 简单的JS脚本用于设置链接地址 -->
-    <script>
-        // 在这里设置实际的链接地址
-        document.getElementById('btn-pdf').href = 'https://arxiv.org/abs/xxxx.xxxxx'; // 替换为实际PDF链接
-        document.getElementById('btn-code').href = 'https://github.com/eternal8080/MV-MATH'; // 替换为实际GitHub链接
-        document.getElementById('btn-demo').href = '#'; // 替换为实际Demo链接
-    </script>
+<footer class="footer">
+  <div class="content has-text-centered"></div>
+  <div class="columns is-centered">
+    <div class="column is-8">
+      <div class="content">
+        <p>
+          This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a>, licensed under a <a rel="license"
+                                              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+          Commons Attribution-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
