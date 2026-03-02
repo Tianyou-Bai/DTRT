@@ -253,6 +253,23 @@
   </div>
 </section>
 
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh;">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths vired-bg">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Engineering diagrams are the core carriers of technical information in industrial contexts, where the pressing demand for their digitization from industrial sectors has driven great advancements in related research domains. However, existing research still suffers from three limitations. Firstly, the detection of symbols, lines, and texts typically involves multiple independent models, resulting in cumbersome workflows. In addition, high-resolution diagrams often impose an excessive computational cost on existing models. Moreover, parsing frameworks solely based on object detection can merely localize component positions, yet fail to capture the topological connection semantics and structured knowledge among components, thus offering limited convenience for industrial applications. To address these issues, we propose an end-to-end information extraction framework based on the Dynamically Tokenized Relation Transformer (DTRT), which can dynamically reduce received image tokens, filter redundant information, and efficiently extract structural knowledge to construct hyper-relational knowledge graphs. We practiced our model on piping and instrumentation diagrams (P&IDs) and electrical diagrams (EDs): the former are widely used in chemical engineering enterprises, while the latter are employed to describe circuit systems. DTRT achieves an R@1000 accuracy of 94.84% on PIDs and R@200 accuracy of 92.52% on EDs with a significantly reduced computational cost.       
+          </p>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+
+
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="content has-text-centered">
@@ -263,20 +280,28 @@
   </div>
 </section>
 
+
 <section class="section">
   <div class="container" style="margin-bottom: 2vh;">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths vired-bg">
-        <h2 class="title is-3">Introduction</h2>
+        <h2 class="title is-3">Summary</h2>
         <div class="content has-text-justified">
           <p>
-            Engineering diagrams are the core carriers of technical information in industrial contexts, where the pressing demand for their digitization from industrial sectors has driven great advancements in related research domains. However, existing research still suffers from three limitations. Firstly, the detection of symbols, lines, and texts typically involves multiple independent models, resulting in cumbersome workflows. In addition, high-resolution diagrams often impose an excessive computational cost on existing models. Moreover, parsing frameworks solely based on object detection can merely localize component positions, yet fail to capture the topological connection semantics and structured knowledge among components, thus offering limited convenience for industrial applications. To address these issues, we propose an end-to-end information extraction framework based on the Dynamically Tokenized Relation Transformer (DTRT), which can dynamically reduce received image tokens, filter redundant information, and efficiently extract structural knowledge to construct hyper-relational knowledge graphs. We practiced our model on piping and instrumentation diagrams (P&IDs) and electrical diagrams (EDs): the former are widely used in chemical engineering enterprises, while the latter are employed to describe circuit systems. DTRT achieves an R@1000 accuracy of 94.84% on PIDs and R@200 accuracy of 92.52% on EDs with a significantly reduced computational cost.       
+            In summary, the main contributions of our work are as follows.       
           </p>
+          <ul style="margin-left: 1.5rem; line-height: 1.8;">
+            <li>An end-to-end information extraction framework DTRT is proposed, which is capable of detecting full elements in engineering diagrams and generating component relation predictions in a single step.</li>
+            <li>A dynamic tokenization mechanism is proposed, which is supervised by both high-level semantics and fine-grained features. Scorers are inserted in layers of the visual backbone to mask low-value tokens, where a reconstruction branch is adopted to refine the scorers’ training and protect important details.</li>
+            <li>An HKG generation mechanism is constructed, where complex relations between components are deeply modeled, and textual labels are extracted and serve as qualifiers of entities and relations. We also introduced hyper relational annotation and text annotation to the existing datasets for model training.</li>
+            <li>A series of experiments are conducted on P&IDs and EDs datasets, and DTRT showed great detection and estimation accuracy, which can offer great support for engineering diagrams digitization.</li>
+          </ul>
         </div>
       </div>
     </div>
 </div>
 </section>
+
 
 <section class="section">
   <div class="container">
