@@ -19,9 +19,12 @@
   <style>
     /* leaderboard.css 核心样式 */
     .vired-bg {
-      background-color: #e9ecef; /* 核心：和ViRED一致的浅灰色 */
+      background-color: #f5f7f9; /* 核心：和ViRED一致的浅灰色 */
       padding: 1.5rem 2rem;      /* 内边距，文字不贴边 */
       margin: 1rem 0;            /* 上下外边距，和其他内容分隔 */
+      width: 100%;               /* 强制宽度100% */
+      max-width: 100%;           /* 突破Bulma column的宽度限制 */
+      box-sizing: border-box;    /* 确保padding不会让背景超出页面 */
       /* 可选：轻微圆角，更柔和（ViRED官网未加，按需选择） */
       /* border-radius: 4px; */
     }
@@ -270,21 +273,10 @@
 </section>
 
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="content has-text-centered">
-      <img src="picture/fig2.png" alt="DTRT工作流程" width="100%"/>
-      <p> Workflow of DTRT, where diagrams are first downsampled or sliced, then processed by a dynamically tokenized visual backbone. Here, scorers are inserted to prune useless tokens assisted by a reconstruction branch. After that, the pruned tokens are processed by a one-stage relation Transformer improved by contrast denoising anchors and query selection, which generates a hyper-relational knowledge graph of engineering diagrams.
-      </p>
-    </div>
-  </div>
-</section>
-
-
 <section class="section">
   <div class="container" style="margin-bottom: 2vh;">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths vired-bg">
+      <div class="column is-four-fifths">
         <h2 class="title is-3">Summary</h2>
         <div class="content has-text-justified">
           <p>
@@ -300,6 +292,17 @@
       </div>
     </div>
 </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="content has-text-centered">
+      <img src="picture/fig2.png" alt="DTRT工作流程" width="100%"/>
+      <p> Workflow of DTRT, where diagrams are first downsampled or sliced, then processed by a dynamically tokenized visual backbone. Here, scorers are inserted to prune useless tokens assisted by a reconstruction branch. After that, the pruned tokens are processed by a one-stage relation Transformer improved by contrast denoising anchors and query selection, which generates a hyper-relational knowledge graph of engineering diagrams.
+      </p>
+    </div>
+  </div>
 </section>
 
 
