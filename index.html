@@ -18,6 +18,19 @@
   <!-- 内联原站核心样式（leaderboard.css + index.css） -->
   <style>
     /* leaderboard.css 核心样式 */
+    .vired-bg {
+      background-color: #e9ecef; /* 核心：和ViRED一致的浅灰色 */
+      padding: 1.5rem 2rem;      /* 内边距，文字不贴边 */
+      margin: 1rem 0;            /* 上下外边距，和其他内容分隔 */
+      /* 可选：轻微圆角，更柔和（ViRED官网未加，按需选择） */
+      /* border-radius: 4px; */
+    }
+    /* 若需要给纯文本/小字体区域适配，可加一个小内边距的版本 */
+    .vired-bg-sm {
+      background-color: #e9ecef;
+      padding: 1rem 1.5rem;
+      margin: 0.5rem 0;
+    }
     .js-sort-table {
       width: 100%;
       border-collapse: collapse;
@@ -253,7 +266,7 @@
 <section class="section">
   <div class="container" style="margin-bottom: 2vh;">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-four-fifths vired-bg">
         <h2 class="title is-3">Introduction</h2>
         <div class="content has-text-justified">
           <p>
