@@ -346,7 +346,7 @@
 
 
 <section class="section">
-  <div class="container" style="margin-bottom: 2vh; width: 80%; max-width: 100%; padding: 0;">
+  <div class="container" style="margin-bottom: 2vh; width: 70%; max-width: 100%; padding: 0;">
     <div>
       <div class="columns is-centered has-text-centered">
         <div class="column">
@@ -386,7 +386,7 @@
 
 
 <section class="section">
-  <div class="container" style="margin-bottom: 2vh; width: 80%; max-width: 100%; padding: 0;">
+  <div class="container" style="margin-bottom: 2vh; width: 70%; max-width: 100%; padding: 0;">
     <div>
       <div class="columns is-centered has-text-centered">
         <div class="column">
@@ -420,7 +420,7 @@
 
 
 <section class="section">
-  <div class="container" style="margin-bottom: 2vh; width: 80%; max-width: 100%; padding: 0;">
+  <div class="container" style="margin-bottom: 2vh; width: 70%; max-width: 100%; padding: 0;">
     <div>
       <div class="columns is-centered has-text-centered">
         <div class="column">
@@ -460,7 +460,7 @@
 
 
 <section class="section">
-  <div class="container" style="margin-bottom: 2vh; width: 80%; max-width: 100%; padding: 0;">
+  <div class="container" style="margin-bottom: 2vh; width: 70%; max-width: 100%; padding: 0;">
     <div>
       <div class="columns is-centered has-text-centered">
         <div class="column">
@@ -500,7 +500,7 @@
 
 
 <section class="section">
-  <div class="container" style="margin-bottom: 2vh; width: 80%; max-width: 100%; padding: 0;">
+  <div class="container" style="margin-bottom: 2vh; width: 70%; max-width: 100%; padding: 0;">
     <div>
       <div class="columns is-centered has-text-centered">
         <div class="column">
@@ -538,267 +538,6 @@
   </div>
 </section>
 
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Overview</h2>
-        <div class="content has-text-justified">
-          <p>
-            <b>MV-MATH</b> is a meticulously annotated dataset designed to evaluate the mathematical reasoning capabilities of MLLMs in <b>multi-visual</b> contexts. Each sample in MV-MATH consists of interleaved multi-image and text. It comprises 2,009 multi-image questions, with some questions containing up to 8 images. It includes three types: multiple-choice, free-form and multi-step questions.           
-            <br><br>
-            <b>MV-MATH</b> is organized into 11 subjects over 3 difficulty levels, including <em>Analytic Geometry, Algebra, Metric Geometry, Combinatorics, Transformation Geometry, Logic, Solid Geometry, Arithmetic, Combinatorial Geometry, Descriptive Geometry</em> and <em>Statistics</em>, covering a range of scenarios from the K-12 mathematics curriculum.
-            <br><br>
-            Based on image relevance, we categorize MV-MATH into two subsets: a <b>mutually dependent set (MD)</b>, where images are interrelated and understanding one image necessitates information from another; and an <b>independent set (ID)</b>, where images are unrelated and can be interpreted independently without reference to other images.
-            <br><br>
-          </p>
-
-          <div id="results-carousel" class="carousel results-carousel">
-            <div class="box m-5">
-              <div class="content has-text-centered">
-                <!-- 图片占位符 -->
-                <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
-                  <p>Sampled MV-MATH examples from each question type</p>
-                </div>
-                <p> Sampled <b>MV-MATH</b> examples from each question type. Each sample contains a multi-visual contexts.</p>
-              </div>
-            </div>
-            <div class="box m-5">
-              <div class="content has-text-centered">
-                <!-- 图片占位符 -->
-                <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
-                  <p>Comparison with existing multimodal math benchmarks</p>
-                </div>
-                <p>Comparison with existing multimodal math benchmarks. MC: Multiple Choice, FF: Free-form, MS:Multi-Step</p>
-              </div>
-            </div>
-          </div>
-          <br><br>
-          You can download the dataset on <a href="https://huggingface.co/datasets/PeijieWang/MV-MATH" target="_blank">Hugging Face Dataset</a>.
-          <br><br>
-          <div class="columns is-centered">
-            <div class="column" style="margin-right: -5rem;">
-              <div class="content has-text-centered">
-                <!-- 图片占位符 -->
-                <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 70%; margin: 0 auto;">
-                  <p>Key statistics of MV-MATH</p>
-                </div>
-                <p>Key statistics of <B>MV-MATH</B>.</p> 
-              </div>
-            </div>
-            <div class="column">
-              <div class="content has-text-centered">
-                <!-- 图片占位符 -->
-                <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
-                  <p>MV-MATH data composition</p>
-                </div>
-                <p>
-                  <b>Inner</b>: divided by question type (3 types).<br/>
-                  <b>Middle</b>: divided by difficulty level (3 levels).<br/>
-                  <b>Outer</b>: divided by subjects (11 subjects).
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="columns is-centered">
-            <div class="column">
-              <div class="box m-5">
-                <div class="content has-text-centered">
-                  <!-- 图片占位符 -->
-                  <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
-                    <p>MV-MATH distribution charts</p>
-                  </div>
-                  <p> 
-                    (a) <strong>comparison with existing mathematical benchmarks</strong>, (b) <strong>distribution of question length per question</strong>, (c) <strong>distribution of the images per question</strong>.
-                  </p> 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RESULTS SECTION -->
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1 mathvista_other">Experiment Results</h1>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths" style="width: 100%;">
-        <h2 class="title is-3">Main Results</h2>
-        <div class="content has-text-justified">
-          <div id="results-carousel" class="carousel results-carousel">  
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 85%; margin: 0 auto;">
-                <p>Model performances across various mathematical subjects</p>
-              </div>
-              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
-                Comparison of model performances across various mathematical subjects. AG: Analytic Geometry, MG: Metric Geometry, TG:
-                Transformation Geometry, SG: Solid Geometry, CG: Combinatorial Geometry, DG: Descriptive Geometry. The first and second highest
-                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
-              </p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 85%; margin: 0 auto;">
-                <p>Model performances on choice problem set</p>
-              </div>
-              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
-                Comparison of model performances across various mathematical subjects on the <b>choice problem set</b>. The first and second highest
-                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
-              </p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 75%; margin: 0 auto;">
-                <p>Model performances on single-step problem set</p>
-              </div>
-              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
-                Comparison of model performances across various mathematical subjects on the <b>single-step problem set</b>. The first and second highest
-                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
-              </p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 75%; margin: 0 auto;">
-                <p>Model performances on multi-step problem set (SAR)</p>
-              </div>
-              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
-                Comparison of model performances across various mathematical subjects on the <b>multi-step problem set(SAR: Step Accuracy Rate)</b>. The first and second highest
-                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
-              </p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 75%; margin: 0 auto;">
-                <p>Model performances on multi-step problem set (QCR)</p>
-              </div>
-              <p style="text-align: center; margin-left: auto; margin-right: auto; width: 75%;">
-                Comparison of model performances across various mathematical subjects on the <b>multi-step problem set(QCR: Question Completeness Rate)</b>. The first and second highest
-                accuracy of LMMs are marked in <span style="color: #df0f20da;">red</span> and <span style="color: #099ee2;">blue</span>, respectively.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
-
-    <div class="columns is-centered m-6">
-      <div class="column is-full has-text-centered content">
-        <h2 class="title is-3">More Results</h2>
-        <div class="box m-5">
-          <div class="content has-text-centered">
-            <!-- 图片占位符 -->
-            <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem;">
-              <p>MV-MATH more results</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Data Examples -->
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1 mathvista_other">Data Examples</h1>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths" style="width: 100%;">
-        <h2 class="title is-3">Data Examples</h2>
-        <div class="content has-text-justified">
-          <div id="results-carousel" class="carousel results-carousel">  
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 65%; margin: 0 auto;">
-                <p>Multiple-choice question example 1</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Multiple-choice question example 2</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Multiple-choice question example 3</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Free-form question example 1</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Free-form questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Free-form question example 2</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Free-form questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Multiple-choice question example 4</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Multi-step question example 1</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Multi-step questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Free-form question example 3</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Free-form questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Free-form question example 4</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Free-form questions.</p>
-            </div>
-            <div class="content has-text-centered">
-              <!-- 图片占位符 -->
-              <div style="background-color: #e9ecef; padding: 4rem 2rem; border: 1px solid #dee2e6; margin-bottom: 1rem; max-width: 45%; margin: 0 auto;">
-                <p>Multiple-choice question example 5</p>
-              </div>
-              <p style="margin-bottom: 30px;">Data Example of Multiple-choice questions.</p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
-  </div>
-</section>
 
 <!-- BibTeX -->
 <section class="section" id="BibTeX">
