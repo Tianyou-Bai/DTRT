@@ -17,6 +17,68 @@
 
   <!-- 内联原站核心样式（leaderboard.css + index.css） -->
   <style>
+    /* ViRED同款横向滚动容器 */
+    .scroll-container-horizontal {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto; /* 横向滚动核心 */
+      overflow-y: hidden; /* 隐藏纵向滚动 */
+      padding: 1rem 0;
+      margin: 2rem 0;
+      /* 美化滚动条（可选，和ViRED一致） */
+      scrollbar-width: thin; /* 火狐 */
+      scrollbar-color: #ccc #f8f9fa; /* 滚动条颜色/背景 */
+    }
+    /* 内层容器：宽度大于外层，实现滚动 */
+    .scroll-content-horizontal {
+      display: flex; /* 横向排列卡片 */
+      gap: 2rem; /* 卡片间距 */
+      padding: 0 1rem;
+      min-width: max-content; /* 宽度自适应内容，不挤压 */
+    }
+    /* 滚动卡片（单组图纸+场景图） */
+    .scroll-card {
+      width: 400px; /* 固定卡片宽度，ViRED常用尺寸 */
+      flex-shrink: 0; /* 禁止卡片收缩 */
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1rem;
+      background-color: #fff;
+    }
+    /* 卡片内图片样式 */
+    .scroll-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    /* 卡片标题/说明 */
+    .scroll-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #212529;
+    }
+    .scroll-card p {
+      font-size: 0.9rem;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+    /* 美化Chrome/Edge滚动条（和ViRED一致） */
+    .scroll-container-horizontal::-webkit-scrollbar {
+      height: 6px; /* 滚动条高度 */
+    }
+    .scroll-container-horizontal::-webkit-scrollbar-track {
+      background: #f8f9fa; /* 轨道背景 */
+      border-radius: 3px;
+    }
+    .scroll-container-horizontal::-webkit-scrollbar-thumb {
+      background: #ccc; /* 滚动条滑块 */
+      border-radius: 3px;
+    }
+    .scroll-container-horizontal::-webkit-scrollbar-thumb:hover {
+      background: #adb5bd; /* hover时加深 */
+    }
     .table-experiment {
       width: 100%;
       border-collapse: collapse;
@@ -539,6 +601,54 @@
 </section>
 
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered mb-6">Visualization Results</h2>
+    
+    <!-- ViRED同款横向滚动区块 -->
+    <div class="scroll-container-horizontal">
+      <div class="scroll-content-horizontal">
+        <!-- 卡片1：P&ID图纸+场景图 -->
+        <div class="scroll-card">
+          <h4>P&ID Diagram (Sample 1)</h4>
+          <img src="picture/example1.png" alt="P&ID Diagram">
+          <p><b>Original:</b> Chemical engineering piping diagram</p>
+          <p><b>Scene Graph:</b> 89 nodes, 94 hyper-relational edges</p>
+          <p><b>Accuracy:</b> 94.84% (R@1000)</p>
+        </div>
+        
+        <!-- 卡片2：ED图纸+场景图 -->
+        <div class="scroll-card">
+          <h4>Electrical Diagram (Sample 1)</h4>
+          <img src="picture/example2.png" alt="Electrical Diagram">
+          <p><b>Original:</b> Industrial circuit diagram</p>
+          <p><b>Scene Graph:</b> 76 nodes, 81 hyper-relational edges</p>
+          <p><b>Accuracy:</b> 92.52% (R@200)</p>
+        </div>
+        
+        <!-- 卡片3：P&ID图纸+场景图 -->
+        <div class="scroll-card">
+          <h4>P&ID Diagram (Sample 2)</h4>
+          <img src="picture/example3.png" alt="P&ID Diagram">
+          <p><b>Original:</b> Refinery piping diagram</p>
+          <p><b>Scene Graph:</b> 102 nodes, 115 hyper-relational edges</p>
+          <p><b>Accuracy:</b> 94.12% (R@1000)</p>
+        </div>
+        
+        <!-- 卡片4：ED图纸+场景图 -->
+        <div class="scroll-card">
+          <h4>Electrical Diagram (Sample 2)</h4>
+          <img src="picture/example4.png" alt="Electrical Diagram">
+          <p><b>Original:</b> Power distribution diagram</p>
+          <p><b>Scene Graph:</b> 85 nodes, 90 hyper-relational edges</p>
+          <p><b>Accuracy:</b> 91.87% (R@200)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
 <!-- BibTeX -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
