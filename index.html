@@ -347,7 +347,7 @@
 
 <section class="section">
   <div class="container" style="margin-bottom: 2vh; width: 100%; max-width: 100%; padding: 0;">
-    <div class="vired-bg">
+    <div>
       <div class="columns is-centered has-text-centered">
         <div class="column">
           <h2 class="title is-4">Ablation Study of Relation Transformer</h2>
@@ -392,6 +392,161 @@
     </h1>
   </div>
 </section>
+
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh; width: 100%; max-width: 100%; padding: 0;">
+    <div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Ablation Study of Dynamic Visual Backbone</h2>
+          <div class="table-container">
+            <table class="table-experiment">
+              <thead>
+                <tr>
+                  <th>S</th>
+                  <th>R</th>
+                  <th>CER↓</th>
+                  <th>WER↓</th>
+                  <th>R@R</th>
+                  <th>R@1000</th>
+                  <th>GFLOPs↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>×</td><td>×</td><td>1.21</td><td>4.33</td><td>68.92</td><td>87.99</td><td>299.2</td></tr>
+                <tr><td>√</td><td>×</td><td>9.86</td><td>19.54</td><td>51.89</td><td>70.12</td><td>90.5</td></tr>
+                <tr><td>√</td><td>√</td><td>1.53</td><td>5.26</td><td>68.75</td><td>87.42</td><td>90.5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="has-text-justified">注：S=Scorer，R=Reconstruction Branch，CER=Character Error Rate，WER=Word Error Rate；↓表示指标越低越好，R@*为百分比（%）。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh; width: 100%; max-width: 100%; padding: 0;">
+    <div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Entity Detection on P&ID Dataset</h2>
+          <div class="table-container">
+            <table class="table-experiment">
+              <thead>
+                <tr>
+                  <th rowspan="2">Method</th>
+                  <th colspan="4">Symbol</th>
+                  <th colspan="2">Text</th>
+                </tr>
+                <tr>
+                  <th>AP50</th>
+                  <th>AP75</th>
+                  <th>AR50</th>
+                  <th>AR75</th>
+                  <th>AP50</th>
+                  <th>AR50</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>YOLOv11</td><td>90.59</td><td>84.91</td><td>84.73</td><td>81.23</td><td>97.11</td><td>92.38</td></tr>
+                <tr><td>DETR</td><td>91.67</td><td>84.89</td><td>85.72</td><td>81.31</td><td>94.54</td><td>89.33</td></tr>
+                <tr><td>D-DETR</td><td>95.41</td><td>92.17</td><td>89.95</td><td>88.13</td><td>98.19</td><td>96.98</td></tr>
+                <tr><td>RT-DETR</td><td>99.27</td><td>97.83</td><td>96.98</td><td>95.47</td><td>99.61</td><td>97.26</td></tr>
+                <tr><td>DTRT (Ours)</td><td>99.01</td><td>97.71</td><td>97.04</td><td>96.07</td><td>99.56</td><td>97.41</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="has-text-justified">注：所有数值均为百分比（%），AP=Average Precision，AR=Average Recall，↑表示指标越高越好。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh; width: 100%; max-width: 100%; padding: 0;">
+    <div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Relational Knowledge Extraction on P&ID Dataset</h2>
+          <div class="table-container">
+            <table class="table-experiment">
+              <thead>
+                <tr>
+                  <th rowspan="2">Method</th>
+                  <th colspan="3">SGCLS</th>
+                  <th colspan="3">SGDET</th>
+                  <th rowspan="2">GFLOPs↓</th>
+                </tr>
+                <tr>
+                  <th>R@R</th>
+                  <th>R@1000</th>
+                  <th>R@2000</th>
+                  <th>R@R</th>
+                  <th>R@1000</th>
+                  <th>R@2000</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>RelTR</td><td>83.41</td><td>87.96</td><td>91.61</td><td>54.19</td><td>65.06</td><td>79.17</td><td>287.8</td></tr>
+                <tr><td>Relationformer</td><td>87.72</td><td>95.12</td><td>98.79</td><td>61.07</td><td>76.43</td><td>91.58</td><td>791.9</td></tr>
+                <tr><td>SGTR</td><td>80.76</td><td>85.84</td><td>91.25</td><td>52.29</td><td>63.89</td><td>76.94</td><td>749.3</td></tr>
+                <tr><td>DTRT (Ours)</td><td>88.62</td><td>95.47</td><td>99.32</td><td>68.75</td><td>87.42</td><td>94.84</td><td>90.5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="has-text-justified">注：SGCLS=Scene Graph Classification，SGDET=Scene Graph Detection；R@*为百分比（%）↑，GFLOPs为计算量↓。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh; width: 100%; max-width: 100%; padding: 0;">
+    <div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Relational Knowledge Extraction on ED Dataset</h2>
+          <div class="table-container">
+            <table class="table-experiment">
+              <thead>
+                <tr>
+                  <th rowspan="2">Method</th>
+                  <th colspan="3">SGCLS</th>
+                  <th colspan="3">SGDET</th>
+                  <th rowspan="2">GFLOPs↓</th>
+                </tr>
+                <tr>
+                  <th>R@50</th>
+                  <th>R@100</th>
+                  <th>R@200</th>
+                  <th>R@50</th>
+                  <th>R@100</th>
+                  <th>R@200</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>RelTR</td><td>82.17</td><td>87.41</td><td>90.98</td><td>54.27</td><td>64.95</td><td>77.91</td><td>209.9</td></tr>
+                <tr><td>Relationformer</td><td>86.72</td><td>91.07</td><td>97.29</td><td>65.18</td><td>77.63</td><td>89.15</td><td>589.4</td></tr>
+                <tr><td>SGTR</td><td>76.56</td><td>81.29</td><td>90.65</td><td>47.21</td><td>64.17</td><td>77.12</td><td>561.1</td></tr>
+                <tr><td>DTRT (Ours)</td><td>85.47</td><td>91.26</td><td>97.63</td><td>70.26</td><td>81.45</td><td>92.52</td><td>67.3</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="has-text-justified">注：SGCLS=Scene Graph Classification，SGDET=Scene Graph Detection；R@*为百分比（%）↑，GFLOPs为计算量↓。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section class="section">
   <div class="container">
